@@ -4,6 +4,7 @@ import CfHow from "@/components/complianceflow/cf-how";
 import CfMockupSections from "@/components/complianceflow/cf-mockup-sections";
 import CfFeatures from "@/components/complianceflow/cf-features";
 import CfPricing from "@/components/complianceflow/cf-pricing";
+import CfDemo from "@/components/complianceflow/cf-demo";
 import CfCta from "@/components/complianceflow/cf-cta";
 import Footer from "@/components/footer";
 
@@ -23,6 +24,7 @@ export default function ComplianceFlowPage() {
         <CfMockupSections />
         <CfFeatures />
         <CfPricing />
+        <CfDemo />
         <CfCta />
       </main>
       <Footer />
