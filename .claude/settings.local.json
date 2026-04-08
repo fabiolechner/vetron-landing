@@ -10,7 +10,12 @@
       "Bash(python3 -c ':*)",
       "Bash(py --version)",
       "Bash(cmd /c \"py --version 2>&1 && echo ok\")",
-      "Bash(cmd /c \"where node && node --version\")"
+      "Bash(cmd /c \"where node && node --version\")",
+      "Bash(git -C \"C:/Users/fabio/Desktop/vetron-landing\" status)",
+      "Bash(powershell -Command \"Set-Location 'C:\\\\Users\\\\fabio\\\\Desktop\\\\vetron-landing'; git status 2>&1\")",
+      "Bash(powershell -Command \"cd 'C:\\\\\\\\Users\\\\\\\\fabio\\\\\\\\Desktop\\\\\\\\vetron-landing'; git status\")",
+      "Bash(cmd /c \"cd /d C:\\\\Users\\\\fabio\\\\Desktop\\\\vetron-landing && git status\")",
+      "Bash(git add:*)"
     ]
   }
 }
