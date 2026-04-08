@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir \"C:\\\\Users\\\\fabio\\\\Desktop\\\\vetron-landing\")",
+      "Bash(convert \"C:/Users/fabio/Desktop/vetron-landing/public/icon-white.png\" -fuzz 15% -transparent black \"C:/Users/fabio/Desktop/vetron-landing/public/icon-transparent.png\")",
+      "Bash(where convert:*)",
+      "Bash(magick --version)",
+      "Bash(magick \"C:/Users/fabio/Desktop/vetron-landing/public/icon-white.png\" -fuzz 15% -transparent black \"C:/Users/fabio/Desktop/vetron-landing/public/icon-transparent.png\")",
+      "Bash(node -e ':*)",
+      "Bash(python3 -c ':*)",
+      "Bash(py --version)",
+      "Bash(cmd /c \"py --version 2>&1 && echo ok\")",
+      "Bash(cmd /c \"where node && node --version\")"
+    ]
+  }
+}
