@@ -50,9 +50,9 @@ export default function CfHero() {
           transition={{ delay: 1, duration: 0.6 }}
           className="mt-10"
         >
-          <a href="https://web-production-f4a88.up.railway.app">
+          <a href="/complianceflow#demo">
             <Button className="h-11 px-8 text-sm font-semibold rounded-[4px] bg-white hover:bg-white/90 text-black border-0 transition-all duration-200 flex items-center gap-2.5 mx-auto group">
-              Kostenlos testen
+              Demo anfragen
               <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
             </Button>
           </a>

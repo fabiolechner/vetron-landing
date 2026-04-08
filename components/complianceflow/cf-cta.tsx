@@ -28,9 +28,9 @@ export default function CfCta() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
-            <a href="https://web-production-f4a88.up.railway.app">
+            <a href="/complianceflow#demo">
               <Button className="h-11 px-9 text-sm font-semibold rounded-[4px] bg-white hover:bg-white/90 text-black border-0 transition-all duration-200 flex items-center gap-2.5 group">
-                Jetzt kostenlos starten
+                Demo anfragen
                 <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
               </Button>
             </a>

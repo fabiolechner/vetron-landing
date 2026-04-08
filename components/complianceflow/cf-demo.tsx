@@ -45,7 +45,7 @@ export default function CfDemo() {
   }
 
   return (
-    <section className="bg-[#000] py-32 px-6 border-t border-white/5">
+    <section id="demo" className="bg-[#000] py-32 px-6 border-t border-white/5">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <motion.div

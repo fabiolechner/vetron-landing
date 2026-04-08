@@ -192,7 +192,7 @@ export default function CfPricing() {
               </p>
 
               {/* CTA */}
-              <a href="https://web-production-f4a88.up.railway.app">
+              <a href="/complianceflow#demo">
                 <Button
                   className={`w-full h-10 text-sm font-semibold rounded-[4px] mb-6 transition-all duration-200 border-0 ${
                     plan.highlighted
