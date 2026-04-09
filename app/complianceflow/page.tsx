@@ -20,21 +20,16 @@ const stagger = {
 function Hero() {
   return (
     <section className="relative bg-black min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-20 text-center overflow-hidden">
-      {/* Green Aurora */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div
-          className="absolute -inset-[10px] opacity-50 will-change-transform blur-[10px]
-            after:content-[''] after:absolute after:inset-0
-            after:[background-image:repeating-linear-gradient(100deg,#000_0%,#000_7%,transparent_10%,transparent_12%,#000_16%),repeating-linear-gradient(100deg,#052e16_10%,#064e3b_15%,#052e16_20%,#065f46_25%,#064e3b_30%)]
-            after:[background-size:200%,_100%]
-            after:animate-aurora after:[background-attachment:fixed]
-            after:mix-blend-difference
-            [background-image:repeating-linear-gradient(100deg,#000_0%,#000_7%,transparent_10%,transparent_12%,#000_16%),repeating-linear-gradient(100deg,#052e16_10%,#064e3b_15%,#052e16_20%,#065f46_25%,#064e3b_30%)]
-            [background-size:300%,_200%]
-            [background-position:50%_50%,50%_50%]
-            [mask-image:radial-gradient(ellipse_at_50%_50%,black_10%,transparent_70%)]"
-        />
-      </div>
+      {/* Green glow */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'radial-gradient(ellipse 80% 60% at 50% 0%, #064e3b 0%, #052e16 40%, #000000 100%)',
+          zIndex: 0,
+          pointerEvents: 'none',
+        }}
+      />
 
       {/* Content */}
       <motion.div
