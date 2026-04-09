@@ -3,7 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
-import { Shield, ArrowRight, Clock } from "lucide-react";
+import { ArrowRight, Clock } from "lucide-react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -98,16 +98,16 @@ export default function Products() {
             {/* ComplianceFlow card */}
             <motion.div variants={fadeUp} transition={{ duration: 0.5 }}>
               <Link href="/complianceflow" className="group block h-full">
-                <div className="h-full relative bg-[#0f0f0f] border border-white/8 rounded-[8px] p-8 transition-all duration-300 group-hover:border-white/20 cursor-pointer overflow-hidden">
+                <div className="h-full relative bg-[#0f0f0f] border border-white/8 border-l-2 border-l-[#10b981] rounded-[8px] p-8 transition-all duration-300 group-hover:border-[#10b981]/30 cursor-pointer overflow-hidden">
                   <div className="relative">
                     {/* Icon */}
-                    <div className="w-10 h-10 rounded-[6px] bg-white/6 border border-white/10 flex items-center justify-center mb-6 group-hover:bg-white/10 transition-colors">
-                      <Shield size={18} className="text-white/70" />
+                    <div className="mb-6">
+                      <img src="/cf-icon.png" alt="ComplianceFlow" style={{ height: "40px", width: "auto" }} />
                     </div>
 
                     {/* Badge */}
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[4px] text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/15 mb-5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[4px] text-xs font-medium bg-[#10b981]/15 text-[#10b981] border border-[#10b981]/30 mb-5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" />
                       Verfügbar
                     </span>
 
@@ -116,7 +116,7 @@ export default function Products() {
                       CE-Erklärungen und Sicherheitsdatenblätter vollautomatisch verwaltet.
                     </p>
 
-                    <span className="inline-flex items-center gap-2 text-sm font-medium text-white/55 group-hover:text-white group-hover:gap-3 transition-all duration-200">
+                    <span className="inline-flex items-center gap-2 text-sm font-medium text-[#10b981] group-hover:text-[#0d9e6e] group-hover:gap-3 transition-all duration-200">
                       Mehr erfahren
                       <ArrowRight size={14} />
                     </span>
