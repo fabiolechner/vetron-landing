@@ -41,7 +41,7 @@ function Hero() {
         variants={stagger}
       >
         <motion.div variants={fadeUp} className="mb-6">
-          <img src="/cf-logo.png" alt="ComplianceFlow" style={{ height: "40px", width: "auto" }} className="mx-auto opacity-90" />
+          <img src="/cf-logo.png" alt="ComplianceFlow" style={{ height: "80px", width: "auto" }} className="mx-auto opacity-90" />
         </motion.div>
 
         <motion.p
