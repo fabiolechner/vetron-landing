@@ -17,8 +17,12 @@ export default function Footer() {
           <Link href="/complianceflow" className="text-sm text-white/35 hover:text-white/60 transition-colors">ComplianceFlow</Link>
         </div>
 
-        {/* Copyright */}
-        <p className="text-sm text-white/25">© 2026 Vetron. Alle Rechte vorbehalten.</p>
+        {/* Copyright + Legal */}
+        <div className="flex items-center gap-4">
+          <p className="text-sm text-white/25">© 2026 Vetron.</p>
+          <Link href="/impressum" className="text-sm text-white/25 hover:text-white/50 transition-colors">Impressum</Link>
+          <Link href="/datenschutz" className="text-sm text-white/25 hover:text-white/50 transition-colors">Datenschutz</Link>
+        </div>
       </div>
     </footer>
   );
