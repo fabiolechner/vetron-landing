@@ -2,8 +2,9 @@
 
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
-import { ArrowRight, Upload, Cpu, Mail, Database, Bell, ClipboardList, BarChart2, FileSearch, Shield } from "lucide-react";
+import { ArrowRight, Upload, Cpu, Mail, Database, Bell, ClipboardList, BarChart2, FileSearch, Shield, Check } from "lucide-react";
 import CfDemo from "@/components/complianceflow/cf-demo";
+import SectionWithMockup from "@/components/ui/section-with-mockup";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
@@ -193,6 +194,157 @@ function HowItWorks() {
   );
 }
 
+// ─── MOCKUP SECTIONS ──────────────────────────────────────────────────────────
+
+function MockupSections() {
+  return (
+    <>
+      <SectionWithMockup
+        title="Wochenbericht auf einen Blick"
+        description="Jeden Freitag automatischer Abgleich — Sie sehen sofort welche Lieferanten geantwortet haben, was noch aussteht und was eskaliert werden muss."
+        primaryImageSrc="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800"
+        secondaryImageSrc="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800"
+        reverseLayout={false}
+      />
+      <SectionWithMockup
+        title="Excel hochladen, fertig."
+        description="Keine ERP-Anbindung nötig. Einfach die bestehende Artikelliste hochladen — ComplianceFlow erkennt automatisch welche Dokumente für welche Lieferanten fehlen."
+        primaryImageSrc="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800"
+        secondaryImageSrc="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800"
+        reverseLayout={true}
+      />
+    </>
+  );
+}
+
+// ─── PRICING ──────────────────────────────────────────────────────────────────
+
+const plans = [
+  {
+    name: "Basic",
+    price: "€399",
+    period: "/Monat",
+    highlight: false,
+    features: [
+      "Max. 50 Lieferanten",
+      "Max. 200 Artikel pro Monat",
+      "CE-Erklärungen automatisiert",
+      "Email-Support",
+      "Artikel-Gedächtnis",
+    ],
+    cta: "Demo anfragen",
+    ctaHref: "#demo",
+  },
+  {
+    name: "Pro",
+    price: "€699",
+    period: "/Monat",
+    highlight: true,
+    badge: "Empfohlen",
+    features: [
+      "Max. 200 Lieferanten",
+      "Max. 1.000 Artikel pro Monat",
+      "CE-Erklärungen + Sicherheitsdatenblätter",
+      "Prioritäts-Support",
+      "Artikel-Gedächtnis + Audit Trail",
+      "Wochenbericht + PDF-Erkennung",
+    ],
+    cta: "Demo anfragen",
+    ctaHref: "#demo",
+  },
+  {
+    name: "Enterprise",
+    price: "Auf Anfrage",
+    period: "",
+    highlight: false,
+    features: [
+      "Unbegrenzte Lieferanten",
+      "Unbegrenzte Artikel",
+      "Alles aus Pro",
+      "Individuelle Anpassung",
+      "Dedizierter Ansprechpartner",
+      "SLA Garantie",
+    ],
+    cta: "Kontakt aufnehmen",
+    ctaHref: "#demo",
+  },
+];
+
+function Pricing() {
+  return (
+    <section className="bg-black py-28 px-6 border-b border-[#222222]">
+      <div className="max-w-5xl mx-auto">
+        <motion.div
+          className="mb-16 text-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={stagger}
+        >
+          <motion.p variants={fadeUp} className="text-xs font-semibold tracking-widest uppercase text-[#10b981] mb-4">
+            Preise
+          </motion.p>
+          <motion.h2 variants={fadeUp} className="text-4xl sm:text-5xl font-bold text-white tracking-tight">
+            Transparente Preise
+          </motion.h2>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {plans.map((plan, i) => (
+            <motion.div
+              key={plan.name}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className={`relative flex flex-col rounded-[8px] p-8 border ${
+                plan.highlight
+                  ? "bg-[#0a0a0a] border-[#10b981]"
+                  : "bg-[#0a0a0a] border-[#222222]"
+              }`}
+            >
+              {plan.badge && (
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs font-semibold bg-[#10b981] text-black">
+                  {plan.badge}
+                </span>
+              )}
+
+              <div className="mb-6">
+                <p className="text-sm font-semibold text-white/50 mb-2">{plan.name}</p>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-4xl font-bold text-white">{plan.price}</span>
+                  {plan.period && <span className="text-sm text-white/35">{plan.period}</span>}
+                </div>
+              </div>
+
+              <ul className="flex flex-col gap-3 mb-8 flex-1">
+                {plan.features.map((f) => (
+                  <li key={f} className="flex items-start gap-2.5 text-sm text-white/60">
+                    <Check size={14} className="text-[#10b981] mt-0.5 shrink-0" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+
+              <a href={plan.ctaHref}>
+                <button
+                  className={`w-full h-10 text-sm font-semibold rounded-[4px] transition-all duration-200 ${
+                    plan.highlight
+                      ? "bg-[#10b981] hover:bg-[#0d9e6e] text-white"
+                      : "bg-transparent border border-[#333] hover:border-white/30 text-white"
+                  }`}
+                >
+                  {plan.cta}
+                </button>
+              </a>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ─── FEATURES ─────────────────────────────────────────────────────────────────
 
 const features = [
@@ -254,7 +406,9 @@ export default function ComplianceFlowPage() {
         <Hero />
         <Stats />
         <HowItWorks />
+        <MockupSections />
         <Features />
+        <Pricing />
         <CfDemo />
       </main>
       <Footer />

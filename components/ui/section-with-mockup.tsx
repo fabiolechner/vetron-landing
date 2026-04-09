@@ -1,58 +1,75 @@
-"use client";
-
+'use client';
+import React from "react";
 import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import type { Variants } from "framer-motion";
 
 interface SectionWithMockupProps {
-  label?: string;
-  title: string;
-  description: string;
-  mockup: ReactNode;
-  reverseLayout?: boolean;
+    title: string | React.ReactNode;
+    description: string | React.ReactNode;
+    primaryImageSrc: string;
+    secondaryImageSrc: string;
+    reverseLayout?: boolean;
 }
 
-export function SectionWithMockup({
-  label,
-  title,
-  description,
-  mockup,
-  reverseLayout = false,
-}: SectionWithMockupProps) {
-  return (
-    <motion.div
-      className={`flex flex-col ${
-        reverseLayout ? "lg:flex-row-reverse" : "lg:flex-row"
-      } items-center gap-12 lg:gap-20`}
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
-    >
-      {/* Text side */}
-      <div className="flex-1 min-w-0">
-        {label && (
-          <p className="text-xs font-semibold tracking-widest uppercase text-white/40 mb-3">
-            {label}
-          </p>
-        )}
-        <h3 className="text-3xl sm:text-4xl font-bold text-white tracking-tight leading-tight mb-5">
-          {title}
-        </h3>
-        <p className="text-base text-white/50 leading-relaxed max-w-md">
-          {description}
-        </p>
-      </div>
+const SectionWithMockup: React.FC<SectionWithMockupProps> = ({
+    title, description, primaryImageSrc, secondaryImageSrc, reverseLayout = false,
+}) => {
+    const containerVariants: Variants = {
+        hidden: {},
+        visible: { transition: { staggerChildren: 0.2 } },
+    };
+    const itemVariants: Variants = {
+        hidden: { opacity: 0, y: 50 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
+    };
+    const layoutClasses = reverseLayout ? "md:grid-cols-2 md:grid-flow-col-dense" : "md:grid-cols-2";
+    const textOrderClass = reverseLayout ? "md:col-start-2" : "";
+    const imageOrderClass = reverseLayout ? "md:col-start-1" : "";
 
-      {/* Mockup side */}
-      <motion.div
-        className="flex-1 w-full min-w-0"
-        initial={{ opacity: 0, x: reverseLayout ? -20 : 20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.7, delay: 0.15, ease: [0.21, 0.47, 0.32, 0.98] }}
-      >
-        {mockup}
-      </motion.div>
-    </motion.div>
-  );
-}
+    return (
+        <section className="relative py-24 md:py-48 bg-black overflow-hidden">
+            <div className="container max-w-[1220px] w-full px-6 md:px-10 relative z-10 mx-auto">
+                <motion.div
+                    className={`grid grid-cols-1 gap-16 md:gap-8 w-full items-center ${layoutClasses}`}
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                >
+                    <motion.div
+                        className={`flex flex-col items-start gap-4 mt-10 md:mt-0 max-w-[546px] mx-auto md:mx-0 ${textOrderClass}`}
+                        variants={itemVariants}
+                    >
+                        <h2 className="text-white text-3xl md:text-[40px] font-semibold leading-tight md:leading-[53px]">{title}</h2>
+                        <p className="text-white/50 text-sm md:text-[15px] leading-6">{description}</p>
+                    </motion.div>
+                    <motion.div
+                        className={`relative mt-10 md:mt-0 mx-auto ${imageOrderClass} w-full max-w-[300px] md:max-w-[471px]`}
+                        variants={itemVariants}
+                    >
+                        <motion.div
+                            className="absolute w-[300px] h-[317px] md:w-[472px] md:h-[500px] bg-[#090909] rounded-[32px] z-0"
+                            style={{ top: reverseLayout ? 'auto' : '10%', bottom: reverseLayout ? '10%' : 'auto', left: reverseLayout ? 'auto' : '-20%', right: reverseLayout ? '-20%' : 'auto', filter: 'blur(2px)' }}
+                            whileInView={{ y: reverseLayout ? -20 : -30 }}
+                            transition={{ duration: 1.2, ease: "easeOut" }}
+                            viewport={{ once: true, amount: 0.5 }}
+                        >
+                            <div className="relative w-full h-full bg-cover bg-center rounded-[32px]" style={{ backgroundImage: `url(${secondaryImageSrc})` }} />
+                        </motion.div>
+                        <motion.div
+                            className="relative w-full h-[405px] md:h-[637px] bg-[#ffffff0a] rounded-[32px] border border-[#222222] z-10 overflow-hidden"
+                            whileInView={{ y: reverseLayout ? 20 : 30 }}
+                            transition={{ duration: 1.2, ease: "easeOut", delay: 0.1 }}
+                            viewport={{ once: true, amount: 0.5 }}
+                        >
+                            <div className="w-full h-full bg-cover bg-center" style={{ backgroundImage: `url(${primaryImageSrc})` }} />
+                        </motion.div>
+                    </motion.div>
+                </motion.div>
+            </div>
+            <div className="absolute w-full h-px bottom-0 left-0 z-0" style={{ background: "radial-gradient(50% 50% at 50% 50%, rgba(255,255,255,0.24) 0%, rgba(255,255,255,0) 100%)" }} />
+        </section>
+    );
+};
+
+export default SectionWithMockup;
