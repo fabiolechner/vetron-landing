@@ -11,14 +11,15 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  console.log("=== DEMO ANFRAGE ===");
-  console.log(`Firma:     ${firma}`);
-  console.log(`Name:      ${name}`);
-  console.log(`Email:     ${email}`);
-  console.log(`Telefon:   ${telefon || "—"}`);
-  console.log(`Nachricht: ${nachricht || "—"}`);
-  console.log(`Zeit:      ${new Date().toISOString()}`);
-  console.log("===================");
+  try {
+    await fetch("https://web-production-f4a88.up.railway.app/api/demo-request", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ firma, name, email, telefon, nachricht }),
+    });
+  } catch (err) {
+    console.error("Railway forward failed:", err);
+  }
 
   return NextResponse.json({ success: true });
 }
