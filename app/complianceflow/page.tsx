@@ -1,17 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
 import { ArrowRight, Upload, Cpu, Mail, Database, Bell, ClipboardList, BarChart2, FileSearch, Shield } from "lucide-react";
 import CfDemo from "@/components/complianceflow/cf-demo";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55 } },
 };
 
-const stagger = {
+const stagger: Variants = {
+  hidden: {},
   visible: { transition: { staggerChildren: 0.1 } },
 };
 
