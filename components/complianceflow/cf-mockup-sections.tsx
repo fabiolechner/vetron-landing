@@ -1,6 +1,6 @@
 "use client";
 
-import { SectionWithMockup } from "@/components/ui/section-with-mockup";
+import SectionWithMockup from "@/components/ui/section-with-mockup";
 
 /* ── Mockup 1: Upload & Email dispatch ─────────────────── */
 function UploadMockup() {
