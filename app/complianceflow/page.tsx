@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { ArrowRight, Upload, Cpu, Mail, Database, Bell, ClipboardList, BarChart2, FileSearch, Shield, Check } from "lucide-react";
 import CfDemo from "@/components/complianceflow/cf-demo";
-import SectionWithMockup from "@/components/ui/section-with-mockup";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
@@ -191,29 +190,6 @@ function HowItWorks() {
         </div>
       </div>
     </section>
-  );
-}
-
-// ─── MOCKUP SECTIONS ──────────────────────────────────────────────────────────
-
-function MockupSections() {
-  return (
-    <>
-      <SectionWithMockup
-        title="Wochenbericht auf einen Blick"
-        description="Jeden Freitag automatischer Abgleich — Sie sehen sofort welche Lieferanten geantwortet haben, was noch aussteht und was eskaliert werden muss."
-        primaryImageSrc="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800"
-        secondaryImageSrc="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800"
-        reverseLayout={false}
-      />
-      <SectionWithMockup
-        title="Excel hochladen, fertig."
-        description="Keine ERP-Anbindung nötig. Einfach die bestehende Artikelliste hochladen — ComplianceFlow erkennt automatisch welche Dokumente für welche Lieferanten fehlen."
-        primaryImageSrc="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800"
-        secondaryImageSrc="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800"
-        reverseLayout={true}
-      />
-    </>
   );
 }
 
@@ -406,7 +382,6 @@ export default function ComplianceFlowPage() {
         <Hero />
         <Stats />
         <HowItWorks />
-        <MockupSections />
         <Features />
         <Pricing />
         <CfDemo />
