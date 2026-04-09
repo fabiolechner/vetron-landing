@@ -99,7 +99,7 @@ export default function CfDemo() {
                 type="text"
                 required
                 placeholder="Mustermann GmbH"
-                className="bg-[#0f0f0f] border border-white/10 rounded-[4px] px-4 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#1d4ed8] transition-colors"
+                className="bg-[#0f0f0f] border border-white/10 rounded-[4px] px-4 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#10b981] transition-colors"
               />
             </div>
             <div className="flex flex-col gap-1.5">
@@ -112,7 +112,7 @@ export default function CfDemo() {
                 type="text"
                 required
                 placeholder="Max Mustermann"
-                className="bg-[#0f0f0f] border border-white/10 rounded-[4px] px-4 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#1d4ed8] transition-colors"
+                className="bg-[#0f0f0f] border border-white/10 rounded-[4px] px-4 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#10b981] transition-colors"
               />
             </div>
           </div>
@@ -129,7 +129,7 @@ export default function CfDemo() {
                 type="email"
                 required
                 placeholder="max@mustermann.at"
-                className="bg-[#0f0f0f] border border-white/10 rounded-[4px] px-4 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#1d4ed8] transition-colors"
+                className="bg-[#0f0f0f] border border-white/10 rounded-[4px] px-4 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#10b981] transition-colors"
               />
             </div>
             <div className="flex flex-col gap-1.5">
@@ -141,7 +141,7 @@ export default function CfDemo() {
                 name="telefon"
                 type="tel"
                 placeholder="+43 1 234 5678"
-                className="bg-[#0f0f0f] border border-white/10 rounded-[4px] px-4 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#1d4ed8] transition-colors"
+                className="bg-[#0f0f0f] border border-white/10 rounded-[4px] px-4 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#10b981] transition-colors"
               />
             </div>
           </div>
@@ -156,7 +156,7 @@ export default function CfDemo() {
               name="nachricht"
               rows={4}
               placeholder="Beschreiben Sie kurz Ihren Anwendungsfall..."
-              className="bg-[#0f0f0f] border border-white/10 rounded-[4px] px-4 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#1d4ed8] transition-colors resize-none"
+              className="bg-[#0f0f0f] border border-white/10 rounded-[4px] px-4 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#10b981] transition-colors resize-none"
             />
           </div>
 
@@ -172,7 +172,7 @@ export default function CfDemo() {
             <Button
               type="submit"
               disabled={loading}
-              className="h-11 px-8 text-sm font-semibold rounded-[4px] bg-[#1d4ed8] hover:bg-[#1e40af] text-white border-0 transition-all duration-200 flex items-center gap-2.5 group disabled:opacity-60"
+              className="h-11 px-8 text-sm font-semibold rounded-[4px] bg-[#10b981] hover:bg-[#0d9e6e] text-white border-0 transition-all duration-200 flex items-center gap-2.5 group disabled:opacity-60"
             >
               {loading ? (
                 <>
