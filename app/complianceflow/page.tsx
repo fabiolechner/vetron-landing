@@ -75,7 +75,7 @@ function Hero() {
               <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
             </button>
           </a>
-          <a href="https://web-production-f4a88.up.railway.app" target="_blank" rel="noopener noreferrer">
+          <a href="https://app.vetron.at" target="_blank" rel="noopener noreferrer">
             <button className="h-11 px-8 text-sm font-semibold rounded-[4px] bg-transparent border border-white/20 hover:border-white/40 text-white transition-all duration-200">
               Direkt starten
             </button>

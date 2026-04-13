@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    await fetch("https://web-production-f4a88.up.railway.app/api/demo-request", {
+    await fetch("https://app.vetron.at/api/demo-request", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ firma, name, email, telefon, nachricht }),

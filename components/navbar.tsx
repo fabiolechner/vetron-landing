@@ -44,7 +44,7 @@ export default function Navbar() {
 
         {/* CTA */}
         <div className="hidden md:block">
-          <a href="https://web-production-f4a88.up.railway.app">
+          <a href="https://app.vetron.at">
             <Button className="bg-white hover:bg-white/90 text-black border-0 px-5 h-9 text-sm font-medium rounded-[4px] transition-all duration-200">
               Jetzt starten
             </Button>
@@ -73,7 +73,7 @@ export default function Navbar() {
           <Link href="/#kontakt" className="text-sm text-white/55 hover:text-white transition-colors py-2" onClick={() => setMenuOpen(false)}>
             Kontakt
           </Link>
-          <a href="https://web-production-f4a88.up.railway.app" className="block">
+          <a href="https://app.vetron.at" className="block">
             <Button className="bg-white hover:bg-white/90 text-black border-0 w-full h-10 text-sm font-medium rounded-[4px]">
               Jetzt starten
             </Button>
