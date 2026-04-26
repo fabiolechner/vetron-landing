@@ -303,33 +303,34 @@ export default function ComplianceFlowPage() {
           {/* SQUARE: Email Finder */}
           <div className={`${styles.bentoCard} ${styles.bcEmail}`}>
             <div className={styles.bentoIllus}>
-              <div className={styles.illusEnvWrap}>
-                <div className={styles.illusEnv}>
-                  <div className={styles.illusEnvFlap} />
-                  <div className={styles.illusEnvLines}>
-                    <div className={styles.illusEnvLine} style={{ width: 26 }} />
-                    <div className={styles.illusEnvLine} style={{ width: 18 }} />
-                  </div>
+              <div className={styles.illusAtWrap}>
+                <div className={styles.illusAt}>
+                  <span className={styles.illusAtSymbol}>@</span>
+                  <div className={styles.illusAtScan} />
                 </div>
               </div>
             </div>
             <div className={styles.bentoTitle}>Email-Finder</div>
-            <div className={styles.bentoDesc}>87% Trefferquote — findet automatisch die Compliance-Abteilung des Lieferanten.</div>
+            <div className={styles.bentoDesc}>
+              Findet automatisch die Compliance-Abteilung des Lieferanten.
+            </div>
+            <span className={styles.illusPctBadge}>90% Trefferquote</span>
           </div>
 
           {/* SQUARE: Gmail */}
           <div className={`${styles.bentoCard} ${styles.bcGmail}`}>
             <div className={styles.bentoIllus}>
-              <div className={styles.illusInbox}>
-                <div className={styles.illusInboxCheck}>
-                  <svg viewBox="0 0 11 11" width="11" height="11">
-                    <path d="M2 5.5l2.5 2.5 4.5-5" stroke="#1B5E20" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                  </svg>
+              <div className={styles.illusInboxWrap}>
+                <div className={styles.illusPdfDoc}>
+                  <span className={styles.illusPdfLabel}>PDF</span>
                 </div>
+                <div className={styles.illusTray} />
               </div>
             </div>
             <div className={styles.bentoTitle}>Gmail-Integration</div>
-            <div className={styles.bentoDesc}>Eingehende PDFs werden gelesen und via KI dem richtigen Artikel zugeordnet.</div>
+            <div className={styles.bentoDesc}>
+              Eingehende PDFs werden gelesen und via KI dem richtigen Artikel zugeordnet.
+            </div>
           </div>
 
           {/* WIDE: Article memory */}

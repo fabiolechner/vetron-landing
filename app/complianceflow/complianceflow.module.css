@@ -850,3 +850,133 @@
   text-transform: uppercase;
   color: #9B9B97;
 }
+
+/* ── EMAIL FINDER: @ Scan animation ── */
+.illusAtWrap {
+  display: flex;
+  align-items: center;
+}
+
+.illusAt {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(26,26,24,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s;
+}
+
+.bentoCard:hover .illusAt {
+  border-color: rgba(27,94,32,0.3);
+}
+
+.illusAtSymbol {
+  font-size: 22px;
+  font-weight: 500;
+  color: #9B9B97;
+  font-family: monospace;
+  transition: color 0.2s, transform 0.4s;
+  display: block;
+  line-height: 1;
+}
+
+.bentoCard:hover .illusAtSymbol {
+  color: #1B5E20;
+  transform: rotate(360deg);
+}
+
+.illusAtScan {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #1B5E20, transparent);
+  opacity: 0;
+}
+
+.bentoCard:hover .illusAtScan {
+  opacity: 1;
+  animation: atScanUp 1s ease-in-out infinite;
+}
+
+@keyframes atScanUp {
+  0%   { bottom: 0;                opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { bottom: calc(100% - 2px); opacity: 1; }
+  100% { bottom: 100%;             opacity: 0; }
+}
+
+.illusPctBadge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: #1B5E20;
+  background: #E8F5E9;
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-top: 6px;
+}
+
+/* ── GMAIL: PDF slides into tray ── */
+.illusInboxWrap {
+  position: relative;
+  width: 56px;
+  height: 52px;
+}
+
+.illusPdfDoc {
+  width: 30px;
+  height: 36px;
+  border: 1.5px solid rgba(26,26,24,0.15);
+  border-radius: 3px 7px 3px 3px;
+  background: #F5F4F0;
+  position: absolute;
+  top: 0;
+  left: 12px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 6px;
+  transition: transform 0.35s cubic-bezier(0.34, 1.1, 0.64, 1), border-color 0.25s;
+}
+
+.illusPdfDoc::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  background: #E0DFD9;
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+}
+
+.illusPdfLabel {
+  font-size: 7px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: #1B5E20;
+}
+
+.bentoCard:hover .illusPdfDoc {
+  transform: translateY(14px);
+  border-color: rgba(27,94,32,0.3);
+}
+
+.illusTray {
+  width: 52px;
+  height: 20px;
+  border: 1.5px solid rgba(26,26,24,0.15);
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  background: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
