@@ -1,392 +1,448 @@
-"use client";
+'use client'
 
-import { motion } from "framer-motion";
-import type { Variants } from "framer-motion";
-import { ArrowRight, Upload, Cpu, Mail, Database, Bell, ClipboardList, BarChart2, FileSearch, Shield, Check } from "lucide-react";
-import CfDemo from "@/components/complianceflow/cf-demo";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
+import { useEffect, useState } from 'react'
+import { Playfair_Display, DM_Sans } from 'next/font/google'
+import styles from './complianceflow.module.css'
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.55 } },
-};
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  style: ['normal', 'italic'],
+  variable: '--font-playfair',
+  display: 'swap',
+})
 
-const stagger: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
-};
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  weight: ['300', '400', '500'],
+  variable: '--font-dm-sans',
+  display: 'swap',
+})
 
-// ─── HERO ────────────────────────────────────────────────────────────────────
-
-function Hero() {
+// CF Logo Icon — real vectorized paths
+function CFIcon({ size = 28, color = '#1B5E20' }: { size?: number; color?: string }) {
   return (
-    <section className="relative bg-black min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-20 text-center overflow-hidden">
-      {/* Green glow */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'radial-gradient(ellipse 80% 60% at 50% 0%, #064e3b 0%, #052e16 40%, #000000 100%)',
-          zIndex: 0,
-          pointerEvents: 'none',
-        }}
-      />
-
-      {/* Content */}
-      <motion.div
-        className="relative z-10 max-w-4xl mx-auto"
-        initial="hidden"
-        animate="visible"
-        variants={stagger}
-      >
-        <motion.div variants={fadeUp} className="mb-6">
-          <img src="/cf-logo.png" alt="ComplianceFlow" style={{ height: "80px", width: "auto" }} className="mx-auto opacity-90" />
-        </motion.div>
-
-        <motion.p
-          variants={fadeUp}
-          className="text-xs font-semibold tracking-widest uppercase text-[#10b981] mb-5"
-        >
-          ComplianceFlow by Vetron
-        </motion.p>
-
-        <motion.h1
-          variants={fadeUp}
-          className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-[1.08] mb-6"
-        >
-          CE-Dokumente.{" "}
-          <span className="text-[#10b981]">Automatisiert.</span>
-        </motion.h1>
-
-        <motion.p
-          variants={fadeUp}
-          className="text-lg sm:text-xl text-white/50 max-w-2xl mx-auto leading-relaxed mb-10"
-        >
-          ComplianceFlow übernimmt die wöchentliche Lieferanten-Kommunikation für
-          CE-Erklärungen und Sicherheitsdatenblätter — damit Ihr Team sich auf das
-          Wesentliche konzentriert.
-        </motion.p>
-
-        <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-3 items-center justify-center">
-          <a href="#demo">
-            <button className="h-11 px-8 text-sm font-semibold rounded-[4px] bg-[#10b981] hover:bg-[#0d9e6e] text-white transition-all duration-200 flex items-center gap-2.5 group">
-              Demo anfragen
-              <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
-            </button>
-          </a>
-          <a href="https://app.vetron.at" target="_blank" rel="noopener noreferrer">
-            <button className="h-11 px-8 text-sm font-semibold rounded-[4px] bg-transparent border border-white/20 hover:border-white/40 text-white transition-all duration-200">
-              Direkt starten
-            </button>
-          </a>
-        </motion.div>
-      </motion.div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        className="mt-20 flex justify-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.6 }}
-      >
-        <motion.div
-          className="w-px h-10 bg-gradient-to-b from-white/20 to-transparent"
-          animate={{ scaleY: [1, 0.5, 1], opacity: [0.4, 0.8, 0.4] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        />
-      </motion.div>
-    </section>
-  );
+    <svg
+      width={size}
+      height={size}
+      viewBox="185 228 58 58"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ flexShrink: 0, transform: 'translateY(2px)' }}
+    >
+      <g fill={color}>
+        <path d="M206.40 269.50 c-12.20 -3.79 -16.28 -18.47 -7.78 -27.90 c3.65 -4.03 7.19 -5.54 13.32 -5.54 c3.16 -0.05 4.08 0.15 6.85 1.51 c1.70 0.88 3.69 2.14 4.33 2.87 l1.22 1.26 l-4.38 -0.29 c-2.38 -0.19 -5.88 -0.44 -7.78 -0.58 c-4.33 -0.34 -6.56 0.34 -9.38 2.87 c-2.87 2.67 -4.03 5.35 -4.03 9.33 c0 3.45 1.02 6.32 3.16 8.85 c1.46 1.70 6.27 4.33 7.05 3.79 c0.34 -0.19 0.53 -4.08 0.53 -11.18 c0 -9.43 0.10 -10.89 0.78 -11.13 c0.44 -0.15 5.25 -0.29 10.69 -0.29 l9.92 0 l0 1.94 l0 1.94 l-8.51 0 l-8.51 0 l0 2.19 l0 2.14 l4.72 0.15 l4.67 0.15 l0.10 1.46 c0.15 2.38 -0.44 2.67 -5.15 2.67 l-4.33 0 l0 5.15 c0 5.10 0 5.10 1.12 4.81 c1.56 -0.49 4.91 -2.48 5.69 -3.35 c0.34 -0.44 0.97 -0.78 1.41 -0.78 c1.22 0.05 3.16 1.75 2.82 2.53 c-0.49 1.31 -6.13 5.25 -8.26 5.74 c-2.92 0.68 -7.49 0.53 -10.26 -0.29z" />
+      </g>
+    </svg>
+  )
 }
 
-// ─── STATS ────────────────────────────────────────────────────────────────────
-
-const stats = [
-  { value: "95%", label: "Weniger manuelle Arbeit" },
-  { value: "10h", label: "Gespart pro Woche" },
-  { value: "100%", label: "DSGVO-konform" },
-];
-
-function Stats() {
+function CheckIcon({ color = 'currentColor' }: { color?: string }) {
   return (
-    <section className="bg-[#111111] border-y border-[#222222] py-12 px-6">
-      <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
-        {stats.map((s, i) => (
-          <motion.div
-            key={s.label}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
-          >
-            <p className="text-4xl font-bold text-[#10b981] mb-1">{s.value}</p>
-            <p className="text-sm text-white/45">{s.label}</p>
-          </motion.div>
-        ))}
-      </div>
-    </section>
-  );
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ color }}>
+      <path d="M2 7l3 3 7-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
 }
-
-// ─── HOW IT WORKS ─────────────────────────────────────────────────────────────
-
-const steps = [
-  {
-    num: "01",
-    icon: Upload,
-    title: "Excel hochladen",
-    desc: "Artikelliste mit Lieferantendaten importieren — kein ERP-Zugang nötig.",
-  },
-  {
-    num: "02",
-    icon: Cpu,
-    title: "KI kategorisiert",
-    desc: "Automatische Erkennung welche Dokumente für welchen Artikel benötigt werden.",
-  },
-  {
-    num: "03",
-    icon: Mail,
-    title: "Emails versendet",
-    desc: "Lieferanten werden automatisch kontaktiert und bei Bedarf erinnert.",
-  },
-];
-
-function HowItWorks() {
-  return (
-    <section className="bg-black py-28 px-6 border-b border-[#222222]">
-      <div className="max-w-5xl mx-auto">
-        <motion.div
-          className="mb-16 text-center"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={stagger}
-        >
-          <motion.p variants={fadeUp} className="text-xs font-semibold tracking-widest uppercase text-[#10b981] mb-4">
-            So funktioniert&apos;s
-          </motion.p>
-          <motion.h2 variants={fadeUp} className="text-4xl sm:text-5xl font-bold text-white tracking-tight">
-            In drei Schritten zu vollständiger Compliance
-          </motion.h2>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {steps.map((step, i) => (
-            <motion.div
-              key={step.num}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.12 }}
-              className="bg-[#0a0a0a] border border-[#222222] rounded-[8px] p-8"
-            >
-              <p className="text-4xl font-bold text-[#10b981]/20 mb-4 font-mono">{step.num}</p>
-              <step.icon size={22} className="text-[#10b981] mb-4" />
-              <h3 className="text-base font-semibold text-white mb-2">{step.title}</h3>
-              <p className="text-sm text-white/40 leading-relaxed">{step.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ─── PRICING ──────────────────────────────────────────────────────────────────
-
-const plans = [
-  {
-    name: "Basic",
-    price: "€399",
-    period: "/Monat",
-    highlight: false,
-    features: [
-      "Max. 50 Lieferanten",
-      "Max. 200 Artikel pro Monat",
-      "CE-Erklärungen automatisiert",
-      "Email-Support",
-      "Artikel-Gedächtnis",
-    ],
-    cta: "Demo anfragen",
-    ctaHref: "#demo",
-  },
-  {
-    name: "Pro",
-    price: "€699",
-    period: "/Monat",
-    highlight: true,
-    badge: "Empfohlen",
-    features: [
-      "Max. 200 Lieferanten",
-      "Max. 1.000 Artikel pro Monat",
-      "CE-Erklärungen + Sicherheitsdatenblätter",
-      "Prioritäts-Support",
-      "Artikel-Gedächtnis + Audit Trail",
-      "Wochenbericht + PDF-Erkennung",
-    ],
-    cta: "Demo anfragen",
-    ctaHref: "#demo",
-  },
-  {
-    name: "Enterprise",
-    price: "Auf Anfrage",
-    period: "",
-    highlight: false,
-    features: [
-      "Unbegrenzte Lieferanten",
-      "Unbegrenzte Artikel",
-      "Alles aus Pro",
-      "Individuelle Anpassung",
-      "Dedizierter Ansprechpartner",
-      "SLA Garantie",
-    ],
-    cta: "Kontakt aufnehmen",
-    ctaHref: "#demo",
-  },
-];
-
-function Pricing() {
-  return (
-    <section className="bg-black py-28 px-6 border-b border-[#222222]">
-      <div className="max-w-5xl mx-auto">
-        <motion.div
-          className="mb-16 text-center"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={stagger}
-        >
-          <motion.p variants={fadeUp} className="text-xs font-semibold tracking-widest uppercase text-[#10b981] mb-4">
-            Preise
-          </motion.p>
-          <motion.h2 variants={fadeUp} className="text-4xl sm:text-5xl font-bold text-white tracking-tight">
-            Transparente Preise
-          </motion.h2>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {plans.map((plan, i) => (
-            <motion.div
-              key={plan.name}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className={`relative flex flex-col rounded-[8px] p-8 border ${
-                plan.highlight
-                  ? "bg-[#0a0a0a] border-[#10b981]"
-                  : "bg-[#0a0a0a] border-[#222222]"
-              }`}
-            >
-              {plan.badge && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs font-semibold bg-[#10b981] text-black">
-                  {plan.badge}
-                </span>
-              )}
-
-              <div className="mb-6">
-                <p className="text-sm font-semibold text-white/50 mb-2">{plan.name}</p>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-4xl font-bold text-white">{plan.price}</span>
-                  {plan.period && <span className="text-sm text-white/35">{plan.period}</span>}
-                </div>
-              </div>
-
-              <ul className="flex flex-col gap-3 mb-8 flex-1">
-                {plan.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2.5 text-sm text-white/60">
-                    <Check size={14} className="text-[#10b981] mt-0.5 shrink-0" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-
-              <a href={plan.ctaHref}>
-                <button
-                  className={`w-full h-10 text-sm font-semibold rounded-[4px] transition-all duration-200 ${
-                    plan.highlight
-                      ? "bg-[#10b981] hover:bg-[#0d9e6e] text-white"
-                      : "bg-transparent border border-[#333] hover:border-white/30 text-white"
-                  }`}
-                >
-                  {plan.cta}
-                </button>
-              </a>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ─── FEATURES ─────────────────────────────────────────────────────────────────
-
-const features = [
-  { icon: Database, title: "Artikel-Gedächtnis", desc: "Bekannte Artikel werden nicht erneut angefragt — das System merkt sich den Status." },
-  { icon: Bell, title: "Eskalations-System", desc: "Automatische Erinnerungen nach Woche 1 und 2, ohne manuelle Nachverfolgung." },
-  { icon: ClipboardList, title: "Audit Trail", desc: "Vollständige Nachverfolgung aller Anfragen, Antworten und Statusänderungen." },
-  { icon: BarChart2, title: "Wochenbericht", desc: "Übersichtlicher Status aller Dokumente auf einen Blick — jederzeit abrufbar." },
-  { icon: FileSearch, title: "PDF-Erkennung", desc: "KI liest eingegangene Dokumente automatisch aus und prüft auf Vollständigkeit." },
-  { icon: Shield, title: "DSGVO-konform", desc: "Gehostet in der EU, Ihre Daten verlassen niemals unsere gesicherten Server." },
-];
-
-function Features() {
-  return (
-    <section className="bg-black py-28 px-6 border-b border-[#222222]">
-      <div className="max-w-5xl mx-auto">
-        <motion.div
-          className="mb-16 text-center"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={stagger}
-        >
-          <motion.p variants={fadeUp} className="text-xs font-semibold tracking-widest uppercase text-[#10b981] mb-4">
-            Features
-          </motion.p>
-          <motion.h2 variants={fadeUp} className="text-4xl sm:text-5xl font-bold text-white tracking-tight">
-            Alles was Sie brauchen
-          </motion.h2>
-        </motion.div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {features.map((f, i) => (
-            <motion.div
-              key={f.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: i * 0.08 }}
-              className="bg-[#0a0a0a] border border-[#222222] hover:border-[#10b981]/25 rounded-[8px] p-6 transition-colors duration-200"
-            >
-              <f.icon size={20} className="text-[#10b981] mb-4" />
-              <h3 className="text-sm font-semibold text-white mb-1.5">{f.title}</h3>
-              <p className="text-sm text-white/38 leading-relaxed">{f.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ─── PAGE ─────────────────────────────────────────────────────────────────────
 
 export default function ComplianceFlowPage() {
+  const [scrolled, setScrolled] = useState(false)
+  const [activeStep, setActiveStep] = useState(0)
+  const [videoClicked, setVideoClicked] = useState(false)
+
+  // Nav scroll effect
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 40)
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Auto-cycle workflow steps
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveStep(prev => (prev + 1) % 4)
+    }, 3500)
+    return () => clearInterval(timer)
+  }, [])
+
+  const workflowSteps = [
+    {
+      num: '01',
+      title: 'Excel hochladen',
+      desc: 'Montag morgen laden Sie Ihre Artikelliste hoch — Bestellnummer, Artikelname, Lieferant. Die KI übernimmt vollständig ab hier.',
+      vtLabel: 'Montag',
+      vtDay: 'Upload',
+    },
+    {
+      num: '02',
+      title: 'KI kategorisiert & sucht Emails',
+      desc: 'Jeder Artikel wird als CE oder TDB eingestuft. Gleichzeitig findet der Email-Finder die Compliance-Abteilung jedes Lieferanten.',
+      vtLabel: 'Montag',
+      vtDay: 'KI & Email',
+    },
+    {
+      num: '03',
+      title: 'Review & Versand',
+      desc: 'Sie prüfen die gefundenen Kontakte kurz — ein Klick, und professionelle Anfragen gehen automatisch von compliance@vetron.at raus.',
+      vtLabel: 'Dienstag',
+      vtDay: 'Versand',
+    },
+    {
+      num: '04',
+      title: 'Eingang & automatische Zuordnung',
+      desc: 'Freitags liest das System alle eingegangenen PDFs ein, ordnet sie zu. Fehlende Dokumente werden automatisch eskaliert.',
+      vtLabel: 'Freitag',
+      vtDay: 'Abgleich',
+    },
+  ]
+
   return (
-    <div className="bg-black">
-      <Navbar />
-      <main>
-        <Hero />
-        <Stats />
-        <HowItWorks />
-        <Features />
-        <Pricing />
-        <CfDemo />
-      </main>
-      <Footer />
+    <div className={`${playfair.variable} ${dmSans.variable} ${styles.page}`}>
+
+      {/* NAV */}
+      <nav className={`${styles.nav} ${scrolled ? styles.navScrolled : ''}`}>
+        <a href="#" className={styles.navLogo}>
+          <CFIcon size={28} color="#1B5E20" />
+          <span className={styles.navLogoWordmark}>ComplianceFlow</span>
+        </a>
+        <ul className={styles.navLinks}>
+          <li><a href="#features">Funktionen</a></li>
+          <li><a href="#workflow">Ablauf</a></li>
+          <li><a href="#pricing">Preise</a></li>
+          <li><a href="mailto:info@vetron.at">Kontakt</a></li>
+          <li><a href="mailto:info@vetron.at" className={styles.navCta}>Demo anfragen</a></li>
+        </ul>
+      </nav>
+
+      {/* HERO */}
+      <div className={styles.hero}>
+        <div>
+          <div className={`${styles.heroEyebrow} ${styles.fuBase}`}>
+            <span className={styles.heroDot} />
+            KI-gestützte Compliance-Automatisierung
+          </div>
+          <h1 className={`${styles.heroHeadline} ${styles.fuBase} ${styles.fuD1}`}>
+            CE-Konformität.<br />
+            <em>Vollständig automatisiert.</em>
+          </h1>
+          <p className={`${styles.heroSub} ${styles.fuBase} ${styles.fuD2}`}>
+            ComplianceFlow übernimmt die wöchentliche Dokumentenanforderung bei Ihren Lieferanten — von der Excel-Liste bis zum signierten PDF, ohne manuelle Nachverfolgung.
+          </p>
+          <div className={`${styles.heroActions} ${styles.fuBase} ${styles.fuD3}`}>
+            <a href="mailto:info@vetron.at" className={styles.btnPrimary}>
+              Demo anfragen
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                <path d="M2.5 7.5h10M8.5 3.5l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </a>
+            <a href="#workflow" className={styles.btnGhost}>So funktioniert&apos;s</a>
+          </div>
+        </div>
+
+        <div className={`${styles.fuBase} ${styles.fuD2}`}>
+          <div className={styles.heroStats}>
+            <div className={styles.heroStat}>
+              <div className={styles.heroStatNum}>87<span>%</span></div>
+              <div className={styles.heroStatLabel}>Email-Trefferquote automatisch</div>
+            </div>
+            <div className={styles.heroStat}>
+              <div className={styles.heroStatNum}>~<span>0</span></div>
+              <div className={styles.heroStatLabel}>Manuelle Stunden pro Zyklus</div>
+            </div>
+          </div>
+          <div className={styles.heroCard}>
+            <div className={styles.heroCardHeader}>
+              <span className={styles.heroCardTitle}>Wochenzyklus KW 17 — laufend</span>
+              <span className={styles.heroCardBadge}>Live</span>
+            </div>
+            {[
+              { label: 'Phoenix Contact', pct: 100, display: '✓' },
+              { label: 'Siemens AG', pct: 100, display: '✓' },
+              { label: 'Wago GmbH', pct: 72, display: '72%' },
+              { label: 'Beckhoff', pct: 18, display: '18%' },
+            ].map((row) => (
+              <div key={row.label} className={styles.progressRow}>
+                <span className={styles.progressLabel}>{row.label}</span>
+                <div className={styles.progressBg}>
+                  <div className={styles.progressBar} style={{ width: `${row.pct}%` }} />
+                </div>
+                <span className={styles.progressPct}>{row.display}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* BENTO FEATURES */}
+      <section id="features" className={styles.section}>
+        <div className={styles.bentoHeader}>
+          <div>
+            <p className={styles.sectionLabel}>Funktionen</p>
+            <h2 className={styles.sectionHeadline}>Alles, was Ihr Compliance-Team braucht.</h2>
+          </div>
+          <p className={styles.sectionSub}>Von der Excel-Liste bis zum vollständigen Audit Trail — ComplianceFlow bildet den gesamten Dokumentenprozess ab.</p>
+        </div>
+
+        <div className={styles.bentoGrid}>
+
+          {/* WIDE: KI Scan */}
+          <div className={`${styles.bentoCard} ${styles.bcScan}`}>
+            <div className={styles.bentoIllus}>
+              <div className={styles.illusScanWrapper}>
+                <div className={styles.illusDocs}>
+                  {[
+                    [24, 18, 22],
+                    [22, 16, 20],
+                    [26, 14, 22],
+                  ].map((widths, i) => (
+                    <div key={i} className={styles.illusDoc}>
+                      <div className={styles.illusDocLines}>
+                        {widths.map((w, j) => (
+                          <div key={j} className={styles.illusDocLine} style={{ width: w }} />
+                        ))}
+                      </div>
+                      <div className={styles.illusScanBeam} style={{ animationDelay: `${i * 0.3}s` }} />
+                    </div>
+                  ))}
+                </div>
+                <svg width="20" height="16" viewBox="0 0 20 16" fill="none" style={{ margin: '0 8px', opacity: 0.3 }}>
+                  <path d="M4 8h12M12 4l4 4-4 4" stroke="#1B5E20" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <div className={styles.illusBadges}>
+                  <span className={styles.badgeCe}>CE</span>
+                  <span className={styles.badgeTdb}>TDB</span>
+                </div>
+              </div>
+            </div>
+            <div className={styles.bentoTitle}>KI-Kategorisierung in Sekunden</div>
+            <div className={styles.bentoDesc}>Claude analysiert jeden Artikel automatisch — CE-Konformitätserklärung oder Sicherheitsdatenblatt. 100% Genauigkeit in Tests, keine manuelle Vorsortierung.</div>
+          </div>
+
+          {/* TALL ACCENT: Weekly cycle */}
+          <div className={`${styles.bentoCard} ${styles.bentoAccent} ${styles.bcCycle}`}>
+            <div className={styles.bentoIllus}>
+              <div className={styles.illusClockWrap}>
+                <div className={styles.illusClockFace} />
+                <div className={styles.illusClockHour} />
+                <div className={styles.illusClockMin} />
+                <div className={styles.illusClockCenter} />
+              </div>
+            </div>
+            <div className={styles.bentoTitle}>Wöchentlicher Automatik-Zyklus</div>
+            <div className={styles.bentoDesc}>Montag Upload, Freitag Abgleich — vollständig automatisiert, mit Eskalation bei ausbleibenden Antworten.</div>
+            <div className={styles.weekPills}>
+              {['Mo', 'Di', 'Mi', 'Do', 'Fr'].map((d) => (
+                <span key={d} className={`${styles.weekPill} ${(d === 'Mo' || d === 'Fr') ? styles.weekPillActive : ''}`}>{d}</span>
+              ))}
+            </div>
+          </div>
+
+          {/* SQUARE: Email Finder */}
+          <div className={`${styles.bentoCard} ${styles.bcEmail}`}>
+            <div className={styles.bentoIllus}>
+              <div className={styles.illusEnvWrap}>
+                <div className={styles.illusEnv}>
+                  <div className={styles.illusEnvFlap} />
+                  <div className={styles.illusEnvLines}>
+                    <div className={styles.illusEnvLine} style={{ width: 26 }} />
+                    <div className={styles.illusEnvLine} style={{ width: 18 }} />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className={styles.bentoTitle}>Email-Finder</div>
+            <div className={styles.bentoDesc}>87% Trefferquote — findet automatisch die Compliance-Abteilung des Lieferanten.</div>
+          </div>
+
+          {/* SQUARE: Gmail */}
+          <div className={`${styles.bentoCard} ${styles.bcGmail}`}>
+            <div className={styles.bentoIllus}>
+              <div className={styles.illusInbox}>
+                <div className={styles.illusInboxCheck}>
+                  <svg viewBox="0 0 11 11" width="11" height="11">
+                    <path d="M2 5.5l2.5 2.5 4.5-5" stroke="#1B5E20" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div className={styles.bentoTitle}>Gmail-Integration</div>
+            <div className={styles.bentoDesc}>Eingehende PDFs werden gelesen und via KI dem richtigen Artikel zugeordnet.</div>
+          </div>
+
+          {/* WIDE: Article memory */}
+          <div className={`${styles.bentoCard} ${styles.bcMemory}`}>
+            <div className={styles.bentoIllus}>
+              <div className={styles.illusMemGrid}>
+                <div className={styles.illusMemRow}>
+                  {[1, 0.6, 0.6, 1, 1, 0.4].map((op, i) => (
+                    <div key={i} className={styles.illusMemCell} style={{ opacity: op }} />
+                  ))}
+                </div>
+                <div className={styles.illusMemRow}>
+                  {[1, 1, 0.5, 0.3].map((op, i) => (
+                    <div key={i} className={styles.illusMemCell} style={{ opacity: op }} />
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className={styles.bentoTitle}>Artikel-Gedächtnis — 60 Tage</div>
+            <div className={styles.bentoDesc}>Einmal gefundene Supplier-Daten werden gecacht — keine doppelte Suche, kein redundanter Aufwand beim nächsten Zyklus. Spart API-Kosten und Zeit.</div>
+          </div>
+
+          {/* SQUARE: Audit trail */}
+          <div className={`${styles.bentoCard} ${styles.bcAudit}`}>
+            <div className={styles.bentoIllus}>
+              <div className={styles.illusBars}>
+                {[12, 18, 14, 22, 28].map((h, i) => (
+                  <div key={i} className={styles.illusBar} style={{ height: h }} />
+                ))}
+              </div>
+            </div>
+            <div className={styles.bentoTitle}>Audit Trail</div>
+            <div className={styles.bentoDesc}>Lückenloser Nachweis für Ihr QM — jederzeit exportierbar.</div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* WORKFLOW + VIDEO */}
+      <div className={styles.workflowWrap} id="workflow">
+        <div className={styles.workflowInner}>
+          <p className={styles.sectionLabel}>Ablauf</p>
+          <h2 className={styles.sectionHeadline}>Von der Excel-Datei zur vollständigen Dokumentation.</h2>
+          <p className={styles.sectionSub}>Der gesamte Compliance-Prozess in einem wöchentlichen Automatik-Zyklus.</p>
+
+          <div className={styles.workflowLayout}>
+            <div className={styles.workflowSteps}>
+              {workflowSteps.map((step, i) => (
+                <div
+                  key={i}
+                  className={`${styles.workflowStep} ${activeStep === i ? styles.workflowStepActive : ''}`}
+                  onClick={() => setActiveStep(i)}
+                >
+                  <span className={styles.wsNum}>{step.num}</span>
+                  <div>
+                    <div className={styles.wsTitle}>{step.title}</div>
+                    <div className={styles.wsDesc}>{step.desc}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className={styles.workflowVideoPanel}>
+              <div className={styles.videoBox}>
+                <div className={styles.videoPlaceholder}>
+                  <div className={styles.videoPlay} onClick={() => setVideoClicked(true)}>
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="#fff" style={{ marginLeft: 3 }}>
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
+                  <span className={styles.videoCaption}>
+                    {videoClicked ? 'Demo-Video wird in Kürze verfügbar' : 'Demo-Video ansehen'}
+                  </span>
+                </div>
+              </div>
+              <div className={styles.videoTimeline}>
+                {workflowSteps.map((step, i) => (
+                  <div
+                    key={i}
+                    className={`${styles.vtStep} ${activeStep === i ? styles.vtStepActive : ''}`}
+                    onClick={() => setActiveStep(i)}
+                  >
+                    <div className={styles.vtLabel}>{step.vtLabel}</div>
+                    <div className={styles.vtDay}>{step.vtDay}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* PRICING */}
+      <section id="pricing" className={styles.section}>
+        <div className={styles.pricingHead}>
+          <p className={styles.sectionLabel}>Preise</p>
+          <h2 className={styles.sectionHeadline}>Transparent. Skalierbar.</h2>
+          <p className={styles.sectionSub}>Alle Pläne inklusive Setup, Support und monatlicher Kündigung.</p>
+        </div>
+        <div className={styles.pricingGrid}>
+
+          {/* Starter */}
+          <div className={styles.pricingCard}>
+            <div className={styles.pTier}>Starter</div>
+            <div className={styles.pPrice}>€399</div>
+            <div className={styles.pPeriod}>pro Monat, zzgl. MwSt.</div>
+            <hr className={styles.pDivider} />
+            <ul className={styles.pFeatures}>
+              {['Bis zu 50 Lieferanten/Monat', 'CE & TDB Kategorisierung', 'Email-Finder + Auto-Versand', 'Wochenbericht (Excel)', 'Email-Support'].map(f => (
+                <li key={f} className={styles.pFeature}><CheckIcon />{f}</li>
+              ))}
+            </ul>
+            <a href="mailto:info@vetron.at" className={`${styles.pCta} ${styles.pCtaOutline}`}>Jetzt starten</a>
+          </div>
+
+          {/* Professional */}
+          <div className={`${styles.pricingCard} ${styles.pricingFeatured}`}>
+            <div className={styles.pricingBadge}>Beliebtester Plan</div>
+            <div className={styles.pTier}>Professional</div>
+            <div className={styles.pPrice}>€699</div>
+            <div className={styles.pPeriod}>pro Monat, zzgl. MwSt.</div>
+            <hr className={styles.pDivider} />
+            <ul className={styles.pFeatures}>
+              {['Unbegrenzte Lieferanten', 'Gmail-Integration (automatisch)', 'KI PDF-Matching & Zuordnung', 'Artikel-Gedächtnis (60 Tage)', 'Eskalations-Automatik', 'Priority-Support (24h)'].map(f => (
+                <li key={f} className={styles.pFeature}><CheckIcon color="#4ADE80" />{f}</li>
+              ))}
+            </ul>
+            <a href="mailto:info@vetron.at" className={`${styles.pCta} ${styles.pCtaWhite}`}>Demo anfragen</a>
+          </div>
+
+          {/* Enterprise */}
+          <div className={styles.pricingCard}>
+            <div className={styles.pTier}>Enterprise</div>
+            <div className={styles.pPrice} style={{ fontSize: 28, paddingTop: 6, letterSpacing: '-0.01em' }}>Auf Anfrage</div>
+            <div className={styles.pPeriod}>individuelles Angebot</div>
+            <hr className={styles.pDivider} />
+            <ul className={styles.pFeatures}>
+              {['Alles aus Professional', 'Multi-Mandanten', 'ERP-Integration auf Anfrage', 'Dedizierter Account Manager', 'SLA-Garantie'].map(f => (
+                <li key={f} className={styles.pFeature}><CheckIcon />{f}</li>
+              ))}
+            </ul>
+            <a href="mailto:info@vetron.at" className={`${styles.pCta} ${styles.pCtaOutline}`}>Kontakt aufnehmen</a>
+          </div>
+
+        </div>
+      </section>
+
+      {/* CTA BANNER */}
+      <div className={styles.ctaWrap}>
+        <div className={styles.ctaInner}>
+          <h2 className={styles.ctaHeadline}>
+            Bereit, Compliance endlich <em>automatisch</em> zu machen?
+          </h2>
+          <div className={styles.ctaBtns}>
+            <a href="mailto:info@vetron.at" className={styles.btnPrimary} style={{ fontSize: 15, padding: '14px 30px' }}>
+              Demo anfragen
+            </a>
+            <span className={styles.ctaNote}>Kostenlose Erstberatung · Keine Bindung</span>
+          </div>
+        </div>
+      </div>
+
+      {/* FOOTER */}
+      <footer className={styles.footer}>
+        <div className={styles.footerLeft}>
+          <span className={styles.footerBrand}>Compliance<span>Flow</span></span>
+          <span className={styles.footerCopy}>by Vetron · © 2026</span>
+        </div>
+        <ul className={styles.footerLinks}>
+          <li><a href="https://vetron.at">vetron.at</a></li>
+          <li><a href="mailto:info@vetron.at">info@vetron.at</a></li>
+          <li><a href="#">Impressum</a></li>
+          <li><a href="#">Datenschutz</a></li>
+        </ul>
+      </footer>
+
     </div>
-  );
+  )
 }
