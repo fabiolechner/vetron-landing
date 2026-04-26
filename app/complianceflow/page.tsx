@@ -49,6 +49,11 @@ export default function ComplianceFlowPage() {
   const [scrolled, setScrolled] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
   const [videoClicked, setVideoClicked] = useState(false)
+  const [showModal, setShowModal] = useState(false)
+  const [formState, setFormState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [formData, setFormData] = useState({
+    firma: '', name: '', email: '', telefon: '', nachricht: ''
+  })
 
   // Nav scroll effect
   useEffect(() => {
@@ -64,6 +69,32 @@ export default function ComplianceFlowPage() {
     }, 3500)
     return () => clearInterval(timer)
   }, [])
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    setFormState('loading')
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+      if (res.ok) {
+        setFormState('success')
+      } else {
+        setFormState('error')
+      }
+    } catch {
+      setFormState('error')
+    }
+  }
+
+  function openModal() { setShowModal(true) }
+  function closeModal() {
+    setShowModal(false)
+    setFormState('idle')
+    setFormData({ firma: '', name: '', email: '', telefon: '', nachricht: '' })
+  }
 
   const workflowSteps = [
     {
@@ -110,7 +141,9 @@ export default function ComplianceFlowPage() {
           <li><a href="#workflow">Ablauf</a></li>
           <li><a href="#pricing">Preise</a></li>
           <li><a href="mailto:info@vetron.at">Kontakt</a></li>
-          <li><a href="mailto:info@vetron.at" className={styles.navCta}>Demo anfragen</a></li>
+          <li>
+            <button onClick={openModal} className={styles.navCta}>Demo anfragen</button>
+          </li>
         </ul>
       </nav>
 
@@ -129,12 +162,12 @@ export default function ComplianceFlowPage() {
             ComplianceFlow übernimmt die wöchentliche Dokumentenanforderung bei Ihren Lieferanten — von der Excel-Liste bis zum signierten PDF, ohne manuelle Nachverfolgung.
           </p>
           <div className={`${styles.heroActions} ${styles.fuBase} ${styles.fuD3}`}>
-            <a href="mailto:info@vetron.at" className={styles.btnPrimary}>
+            <button onClick={openModal} className={styles.btnPrimary}>
               Demo anfragen
               <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
                 <path d="M2.5 7.5h10M8.5 3.5l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-            </a>
+            </button>
             <a href="#workflow" className={styles.btnGhost}>So funktioniert&apos;s</a>
           </div>
         </div>
@@ -394,7 +427,7 @@ export default function ComplianceFlowPage() {
                 <li key={f} className={styles.pFeature}><CheckIcon color="#4ADE80" />{f}</li>
               ))}
             </ul>
-            <a href="mailto:info@vetron.at" className={`${styles.pCta} ${styles.pCtaWhite}`}>Demo anfragen</a>
+            <button onClick={openModal} className={`${styles.pCta} ${styles.pCtaWhite}`}>Demo anfragen</button>
           </div>
 
           {/* Enterprise */}
@@ -421,9 +454,9 @@ export default function ComplianceFlowPage() {
             Bereit, Compliance endlich <em>automatisch</em> zu machen?
           </h2>
           <div className={styles.ctaBtns}>
-            <a href="mailto:info@vetron.at" className={styles.btnPrimary} style={{ fontSize: 15, padding: '14px 30px' }}>
+            <button onClick={openModal} className={styles.btnPrimary} style={{ fontSize: 15, padding: '14px 30px' }}>
               Demo anfragen
-            </a>
+            </button>
             <span className={styles.ctaNote}>Kostenlose Erstberatung · Keine Bindung</span>
           </div>
         </div>
@@ -442,6 +475,121 @@ export default function ComplianceFlowPage() {
           <li><a href="#">Datenschutz</a></li>
         </ul>
       </footer>
+
+      {/* MODAL */}
+      {showModal && (
+        <div className={styles.modalOverlay} onClick={(e) => { if (e.target === e.currentTarget) closeModal() }}>
+          <div className={styles.modalBox}>
+            <button className={styles.modalClose} onClick={closeModal}>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+            </button>
+
+            {formState === 'success' ? (
+              <div className={styles.modalSuccess}>
+                <div className={styles.modalSuccessIcon}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M5 12l5 5L19 7" stroke="#1B5E20" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+                <div className={styles.modalSuccessTitle}>Anfrage gesendet!</div>
+                <div className={styles.modalSuccessText}>
+                  Wir melden uns innerhalb von 24 Stunden bei Ihnen. Wir freuen uns auf das Gespräch.
+                </div>
+                <button className={styles.btnPrimary} onClick={() => { setShowModal(false); setFormState('idle') }}>
+                  Schließen
+                </button>
+              </div>
+            ) : (
+              <>
+                <div className={styles.modalEyebrow}>Kontakt</div>
+                <h2 className={styles.modalHeadline}>Demo anfragen</h2>
+                <p className={styles.modalSub}>Wir melden uns innerhalb von 24 Stunden bei Ihnen.</p>
+
+                <form className={styles.modalForm} onSubmit={handleSubmit}>
+                  <div className={styles.modalRow}>
+                    <div className={styles.modalField}>
+                      <label className={styles.modalLabel}>Firma <span style={{ color: '#EF4444' }}>*</span></label>
+                      <input
+                        className={styles.modalInput}
+                        placeholder="Mustermann GmbH"
+                        value={formData.firma}
+                        onChange={e => setFormData(p => ({ ...p, firma: e.target.value }))}
+                        required
+                      />
+                    </div>
+                    <div className={styles.modalField}>
+                      <label className={styles.modalLabel}>Name <span style={{ color: '#EF4444' }}>*</span></label>
+                      <input
+                        className={styles.modalInput}
+                        placeholder="Max Mustermann"
+                        value={formData.name}
+                        onChange={e => setFormData(p => ({ ...p, name: e.target.value }))}
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div className={styles.modalRow}>
+                    <div className={styles.modalField}>
+                      <label className={styles.modalLabel}>Email <span style={{ color: '#EF4444' }}>*</span></label>
+                      <input
+                        type="email"
+                        className={styles.modalInput}
+                        placeholder="max@mustermann.at"
+                        value={formData.email}
+                        onChange={e => setFormData(p => ({ ...p, email: e.target.value }))}
+                        required
+                      />
+                    </div>
+                    <div className={styles.modalField}>
+                      <label className={styles.modalLabel}>Telefon <span className={styles.modalLabelOptional}>(optional)</span></label>
+                      <input
+                        className={styles.modalInput}
+                        placeholder="+43 1 234 5678"
+                        value={formData.telefon}
+                        onChange={e => setFormData(p => ({ ...p, telefon: e.target.value }))}
+                      />
+                    </div>
+                  </div>
+
+                  <div className={styles.modalField}>
+                    <label className={styles.modalLabel}>Nachricht <span className={styles.modalLabelOptional}>(optional)</span></label>
+                    <textarea
+                      className={`${styles.modalInput} ${styles.modalTextarea}`}
+                      placeholder="Beschreiben Sie kurz Ihren Anwendungsfall..."
+                      value={formData.nachricht}
+                      onChange={e => setFormData(p => ({ ...p, nachricht: e.target.value }))}
+                    />
+                  </div>
+
+                  <hr className={styles.modalDivider} />
+
+                  <div className={styles.modalSubmit}>
+                    <span className={styles.modalNote}>
+                      Ihre Daten werden vertraulich behandelt<br />und nicht an Dritte weitergegeben.
+                    </span>
+                    <button
+                      type="submit"
+                      className={styles.btnPrimary}
+                      disabled={formState === 'loading'}
+                    >
+                      {formState === 'loading' ? 'Wird gesendet...' : 'Anfrage senden →'}
+                    </button>
+                  </div>
+
+                  {formState === 'error' && (
+                    <p style={{ fontSize: 13, color: '#EF4444', textAlign: 'center' }}>
+                      Fehler beim Senden. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt an info@vetron.at
+                    </p>
+                  )}
+                </form>
+              </>
+            )}
+          </div>
+        </div>
+      )}
 
     </div>
   )
