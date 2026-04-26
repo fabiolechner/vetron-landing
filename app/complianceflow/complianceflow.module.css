@@ -624,3 +624,229 @@
   line-height: 1.6;
   max-width: 340px;
 }
+
+/* ── NEW HERO (Variant D) ── */
+
+.heroNew {
+  background: var(--cream);
+  border-bottom: 1px solid rgba(26,26,24,0.09);
+  padding-top: 64px;
+}
+
+.heroCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 48px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.heroHeadlineNew {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(48px, 6vw, 72px);
+  font-weight: 400;
+  line-height: 1.0;
+  letter-spacing: -0.035em;
+  color: #1A1A18;
+  margin-bottom: 22px;
+  max-width: 640px;
+}
+
+.heroHeadlineNew em {
+  font-style: italic;
+  color: #1B5E20;
+}
+
+.heroSubNew {
+  font-size: 16px;
+  font-weight: 300;
+  color: #6B6B67;
+  line-height: 1.72;
+  max-width: 440px;
+  margin-bottom: 32px;
+}
+
+.heroActionsNew {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 48px;
+}
+
+/* ── TIMELINE ── */
+.tlWrap {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  margin-bottom: 48px;
+  padding-top: 4px;
+}
+
+.tlTrack {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  right: 20px;
+  height: 1px;
+  background: rgba(26,26,24,0.14);
+  z-index: 0;
+}
+
+.tlFill {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  height: 1px;
+  background: #1B5E20;
+  z-index: 1;
+  transition: width 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tlNodes {
+  display: flex;
+  position: relative;
+  z-index: 2;
+}
+
+.tnode {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 2px 0 14px;
+}
+
+.tdot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(26,26,24,0.14);
+  background: #F5F4F0;
+  transition: background 0.25s, border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+  position: relative;
+  z-index: 3;
+}
+
+.tnodeLit .tdot {
+  background: #1B5E20;
+  border-color: #1B5E20;
+}
+
+.tnodeActive .tdot {
+  background: #1B5E20;
+  border-color: #1B5E20;
+  transform: scale(1.3);
+  box-shadow: 0 0 0 5px rgba(27, 94, 32, 0.12);
+}
+
+.tday {
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9B9B97;
+  transition: color 0.2s;
+}
+
+.tnodeLit .tday,
+.tnodeActive .tday {
+  color: #1B5E20;
+}
+
+.tnodeActive .tday {
+  font-weight: 600;
+}
+
+.tlabel {
+  font-size: 11px;
+  font-weight: 300;
+  color: #6B6B67;
+  text-align: center;
+  transition: color 0.2s;
+}
+
+.tnodeLit .tlabel,
+.tnodeActive .tlabel {
+  color: #3D3D3A;
+}
+
+/* ── STATS BAR ── */
+.heroSbar {
+  display: flex;
+  width: 100%;
+  border-top: 1px solid rgba(26,26,24,0.09);
+}
+
+.heroScol {
+  flex: 1;
+  padding: 18px 0;
+  border-right: 1px solid rgba(26,26,24,0.09);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: background 0.18s;
+  cursor: default;
+}
+
+.heroScol:last-child {
+  border-right: none;
+}
+
+.heroScol:hover {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.heroScol:hover .heroSnum {
+  color: #1B5E20;
+}
+
+.heroSnum {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: 26px;
+  font-weight: 500;
+  color: #1A1A18;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.heroSnum b {
+  color: #1B5E20;
+  font-weight: 500;
+}
+
+.heroSlabel {
+  font-size: 10px;
+  color: #9B9B97;
+  margin-top: 3px;
+}
+
+.heroScolAt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 0;
+}
+
+.heroScolAt svg {
+  transition: transform 0.25s, opacity 0.25s;
+  opacity: 0.9;
+}
+
+.heroScolAt:hover svg {
+  transform: scale(1.06);
+  opacity: 1;
+}
+
+.heroAtLabel {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #9B9B97;
+}
