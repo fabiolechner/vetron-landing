@@ -44,6 +44,41 @@ function CFIcon({ size = 22, color = '#1B5E20' }: { size?: number; color?: strin
 
 export default function VetronPage() {
   const [scrolled, setScrolled] = useState(false)
+  const [showModal, setShowModal] = useState(false)
+  const [formState, setFormState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [formData, setFormData] = useState({
+    firma: '', name: '', email: '', telefon: '', nachricht: ''
+  })
+
+  const openModal = () => {
+    setShowModal(true)
+    setFormState('idle')
+    document.body.style.overflow = 'hidden'
+  }
+  const closeModal = () => {
+    setShowModal(false)
+    document.body.style.overflow = ''
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setFormState('loading')
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, product: 'Vetron' }),
+      })
+      if (res.ok) {
+        setFormState('success')
+        setFormData({ firma: '', name: '', email: '', telefon: '', nachricht: '' })
+      } else {
+        setFormState('error')
+      }
+    } catch {
+      setFormState('error')
+    }
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
@@ -63,7 +98,7 @@ export default function VetronPage() {
           <li><a href="#unternehmen">Unternehmen</a></li>
           <li><a href="#kontakt">Kontakt</a></li>
         </ul>
-        <a href="mailto:info@vetron.at" className={styles.navCta}>Kontakt aufnehmen</a>
+        <button onClick={openModal} className={styles.navCta}>Kontakt aufnehmen</button>
       </nav>
 
       {/* ── HERO ── */}
@@ -173,10 +208,10 @@ export default function VetronPage() {
                 Maßgeschneiderte Entwicklung auf Basis der Vetron-Plattform
                 für spezifische Betriebsanforderungen.
               </p>
-              <a href="mailto:info@vetron.at" className={styles.pLinkEnt}>
+              <button onClick={openModal} className={styles.pLinkEnt}>
                 <span className={styles.pLinkLineEnt} />
                 Gespräch anfragen
-              </a>
+              </button>
             </div>
 
           </div>
@@ -273,7 +308,7 @@ export default function VetronPage() {
             Bereit für das<br />Gespräch?<br /><em>Wir auch.</em>
           </h2>
           <div className={styles.ctaActions}>
-            <a href="mailto:info@vetron.at" className={styles.ctaBtn}>info@vetron.at</a>
+            <button onClick={openModal} className={styles.ctaBtn}>info@vetron.at</button>
             <span className={styles.ctaNote}>Wir antworten innerhalb von 24 Stunden</span>
           </div>
         </div>
@@ -323,6 +358,128 @@ export default function VetronPage() {
           </div>
         </div>
       </footer>
+
+      {/* ── KONTAKT MODAL ── */}
+      {showModal && (
+        <div className={styles.modalOverlay} onClick={(e) => e.target === e.currentTarget && closeModal()}>
+          <div className={styles.modalCard}>
+
+            {/* Header */}
+            <div className={styles.modalHeader}>
+              <div>
+                <div className={styles.modalTag}>Kontakt</div>
+                <h2 className={styles.modalTitle}>Gespräch anfragen</h2>
+              </div>
+              <button onClick={closeModal} className={styles.modalClose} aria-label="Schließen">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M3 3l12 12M15 3L3 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                </svg>
+              </button>
+            </div>
+
+            {formState === 'success' ? (
+              <div className={styles.modalSuccess}>
+                <div className={styles.modalSuccessIcon}>
+                  <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                    <path d="M4 14l7 7L24 7" stroke="#1B5E20" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+                <h3 className={styles.modalSuccessTitle}>Anfrage gesendet</h3>
+                <p className={styles.modalSuccessText}>
+                  Vielen Dank — wir melden uns innerhalb von 24 Stunden bei Ihnen.
+                </p>
+                <button onClick={closeModal} className={styles.modalSuccessBtn}>Schließen</button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className={styles.modalForm}>
+                <div className={styles.modalRow}>
+                  <div className={styles.modalField}>
+                    <label className={styles.modalLabel}>Firma *</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="Muster GmbH"
+                      className={styles.modalInput}
+                      value={formData.firma}
+                      onChange={e => setFormData(p => ({ ...p, firma: e.target.value }))}
+                    />
+                  </div>
+                  <div className={styles.modalField}>
+                    <label className={styles.modalLabel}>Name *</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="Max Mustermann"
+                      className={styles.modalInput}
+                      value={formData.name}
+                      onChange={e => setFormData(p => ({ ...p, name: e.target.value }))}
+                    />
+                  </div>
+                </div>
+                <div className={styles.modalRow}>
+                  <div className={styles.modalField}>
+                    <label className={styles.modalLabel}>E-Mail *</label>
+                    <input
+                      type="email"
+                      required
+                      placeholder="max@muster.at"
+                      className={styles.modalInput}
+                      value={formData.email}
+                      onChange={e => setFormData(p => ({ ...p, email: e.target.value }))}
+                    />
+                  </div>
+                  <div className={styles.modalField}>
+                    <label className={styles.modalLabel}>Telefon</label>
+                    <input
+                      type="tel"
+                      placeholder="+43 ..."
+                      className={styles.modalInput}
+                      value={formData.telefon}
+                      onChange={e => setFormData(p => ({ ...p, telefon: e.target.value }))}
+                    />
+                  </div>
+                </div>
+                <div className={styles.modalField}>
+                  <label className={styles.modalLabel}>Nachricht</label>
+                  <textarea
+                    rows={4}
+                    placeholder="Womit können wir Ihnen helfen?"
+                    className={`${styles.modalInput} ${styles.modalTextarea}`}
+                    value={formData.nachricht}
+                    onChange={e => setFormData(p => ({ ...p, nachricht: e.target.value }))}
+                  />
+                </div>
+
+                {formState === 'error' && (
+                  <p className={styles.modalError}>
+                    Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt an info@vetron.at
+                  </p>
+                )}
+
+                <div className={styles.modalFooter}>
+                  <p className={styles.modalNote}>Wir antworten innerhalb von 24 Stunden.</p>
+                  <button
+                    type="submit"
+                    className={styles.modalSubmit}
+                    disabled={formState === 'loading'}
+                  >
+                    {formState === 'loading' ? (
+                      <span className={styles.modalSpinner} />
+                    ) : (
+                      <>
+                        Anfrage senden
+                        <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                          <path d="M2 6.5h9M7.5 3l3 3.5-3 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </>
+                    )}
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
 
     </div>
   )
