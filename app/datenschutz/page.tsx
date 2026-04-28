@@ -1,88 +1,92 @@
-export default function Datenschutz() {
+'use client'
+
+import { Cormorant_Garamond, DM_Sans } from 'next/font/google'
+import Link from 'next/link'
+import styles from './datenschutz.module.css'
+
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['300', '400'],
+  style: ['normal', 'italic'],
+  variable: '--font-cormorant',
+  display: 'swap',
+})
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  weight: ['300', '400', '500'],
+  variable: '--font-dm-sans',
+  display: 'swap',
+})
+
+export default function DatenschutzPage() {
   return (
-    <main className="max-w-2xl mx-auto px-6 py-24 text-white">
-      <h1 className="text-3xl font-bold mb-8">Datenschutzerklärung</h1>
+    <div className={`${cormorant.variable} ${dmSans.variable} ${styles.root}`}>
+      <nav className={styles.nav}>
+        <Link href="/" className={styles.navLogo}>Vetron</Link>
+        <Link href="/" className={styles.navBack}>← Zurück zur Startseite</Link>
+      </nav>
 
-      <section className="mb-8">
-        <h2 className="text-lg font-semibold mb-2">1. Verantwortlicher</h2>
-        <p>Fabio Lechner</p>
-        <p>Schafflerweg 17, 2721 Bad Fischau-Brunn, Österreich</p>
-        <p>E-Mail: vetron.docs@gmail.com</p>
-      </section>
+      <main className={styles.main}>
+        <div className={styles.inner}>
+          <p className={styles.tag}>Rechtliches</p>
+          <h1 className={styles.headline}>Datenschutz&shy;erklärung</h1>
+          <div className={styles.divider} />
 
-      <section className="mb-8">
-        <h2 className="text-lg font-semibold mb-2">2. Erhebung und Verarbeitung personenbezogener Daten</h2>
-        <p>
-          Wir erheben personenbezogene Daten nur, wenn Sie uns diese im Rahmen einer Demo-Anfrage
-          freiwillig mitteilen. Dies betrifft: Name, Firmenname, E-Mail-Adresse, Telefonnummer und
-          Ihre Nachricht.
-        </p>
-      </section>
+          <div className={styles.block}>
+            <h2 className={styles.blockTitle}>Verantwortlicher</h2>
+            <p className={styles.text}>Vetron GmbH</p>
+            <p className={styles.text}>Musterstraße 1<br />2700 Wiener Neustadt<br />Österreich</p>
+            <p className={styles.text}>E-Mail: <a href="mailto:info@vetron.at" className={styles.link}>info@vetron.at</a></p>
+          </div>
 
-      <section className="mb-8">
-        <h2 className="text-lg font-semibold mb-2">3. Zweck der Verarbeitung</h2>
-        <p>
-          Die von Ihnen übermittelten Daten werden ausschließlich zur Bearbeitung Ihrer Demo-Anfrage
-          und zur Kontaktaufnahme mit Ihnen verwendet. Eine Weitergabe an Dritte erfolgt nicht.
-        </p>
-      </section>
+          <div className={styles.block}>
+            <h2 className={styles.blockTitle}>Erhebung von Daten</h2>
+            <p className={styles.text}>
+              Beim Besuch unserer Website werden automatisch technische Daten (IP-Adresse, Browser,
+              Zeitpunkt) erfasst. Diese Daten dienen ausschließlich der technischen Bereitstellung
+              der Website.
+            </p>
+          </div>
 
-      <section className="mb-8">
-        <h2 className="text-lg font-semibold mb-2">4. Rechtsgrundlage</h2>
-        <p>
-          Die Verarbeitung erfolgt auf Basis von Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung)
-          sowie Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Beantwortung von Anfragen).
-        </p>
-      </section>
+          <div className={styles.block}>
+            <h2 className={styles.blockTitle}>Kontaktformular</h2>
+            <p className={styles.text}>
+              Wenn Sie uns per E-Mail kontaktieren, werden Ihre Angaben zur Bearbeitung der Anfrage
+              gespeichert. Eine Weitergabe an Dritte erfolgt nicht.
+            </p>
+          </div>
 
-      <section className="mb-8">
-        <h2 className="text-lg font-semibold mb-2">5. Speicherdauer</h2>
-        <p>
-          Ihre Daten werden nur so lange gespeichert, wie es für die Bearbeitung Ihrer Anfrage
-          erforderlich ist, oder bis Sie einer weiteren Speicherung widersprechen.
-        </p>
-      </section>
+          <div className={styles.block}>
+            <h2 className={styles.blockTitle}>Cookies</h2>
+            <p className={styles.text}>
+              Diese Website verwendet nur technisch notwendige Cookies. Es werden keine Tracking-
+              oder Marketing-Cookies eingesetzt.
+            </p>
+          </div>
 
-      <section className="mb-8">
-        <h2 className="text-lg font-semibold mb-2">6. Ihre Rechte</h2>
-        <p>Sie haben das Recht auf:</p>
-        <ul className="list-disc list-inside mt-2 space-y-1">
-          <li>Auskunft über Ihre gespeicherten Daten (Art. 15 DSGVO)</li>
-          <li>Berichtigung unrichtiger Daten (Art. 16 DSGVO)</li>
-          <li>Löschung Ihrer Daten (Art. 17 DSGVO)</li>
-          <li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
-          <li>Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)</li>
-        </ul>
-        <p className="mt-2">
-          Zur Ausübung Ihrer Rechte wenden Sie sich bitte an: vetron.docs@gmail.com
-        </p>
-      </section>
+          <div className={styles.block}>
+            <h2 className={styles.blockTitle}>Ihre Rechte</h2>
+            <p className={styles.text}>
+              Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der
+              Verarbeitung Ihrer personenbezogenen Daten gemäß DSGVO. Kontakt:{' '}
+              <a href="mailto:info@vetron.at" className={styles.link}>info@vetron.at</a>
+            </p>
+          </div>
 
-      <section className="mb-8">
-        <h2 className="text-lg font-semibold mb-2">7. Hosting</h2>
-        <p>
-          Diese Website wird über Vercel Inc., 340 Pine Street, Suite 701, San Francisco, CA 94104,
-          USA gehostet. Vercel kann dabei Server-Logdaten erfassen. Weitere Informationen finden Sie
-          in der Datenschutzerklärung von Vercel:{" "}
-          <a
-            href="https://vercel.com/legal/privacy-policy"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline"
-          >
-            https://vercel.com/legal/privacy-policy
-          </a>
-        </p>
-      </section>
+          <div className={styles.block}>
+            <h2 className={styles.blockTitle}>Hosting</h2>
+            <p className={styles.text}>
+              Diese Website wird über Vercel Inc. gehostet. Verarbeitungsgrundlage ist
+              Art. 6 Abs. 1 lit. f DSGVO.
+            </p>
+          </div>
+        </div>
+      </main>
 
-      <section>
-        <h2 className="text-lg font-semibold mb-2">8. Beschwerderecht</h2>
-        <p>
-          Sie haben das Recht, sich bei der österreichischen Datenschutzbehörde zu beschweren:
-          Österreichische Datenschutzbehörde, Barichgasse 40-42, 1030 Wien,
-          dsb@dsb.gv.at
-        </p>
-      </section>
-    </main>
-  );
+      <footer className={styles.footer}>
+        <span>© 2026 Vetron · <Link href="/impressum" className={styles.footerLink}>Impressum</Link></span>
+      </footer>
+    </div>
+  )
 }

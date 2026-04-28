@@ -309,8 +309,8 @@ export default function VetronPage() {
           <div>
             <div className={styles.footerColTitle}>Rechtliches</div>
             <ul className={styles.footerLinks}>
-              <li><a>Impressum</a></li>
-              <li><a>Datenschutz</a></li>
+              <li><Link href="/impressum">Impressum</Link></li>
+              <li><Link href="/datenschutz">Datenschutz</Link></li>
               <li><a>AGB</a></li>
             </ul>
           </div>
@@ -318,8 +318,8 @@ export default function VetronPage() {
         <div className={styles.footerBottom}>
           <span>© 2026 Vetron. Alle Rechte vorbehalten. · Österreich</span>
           <div className={styles.footerLegal}>
-            <a>Impressum</a>
-            <a>Datenschutz</a>
+            <Link href="/impressum">Impressum</Link>
+            <Link href="/datenschutz">Datenschutz</Link>
           </div>
         </div>
       </footer>

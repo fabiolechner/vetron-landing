@@ -1,49 +1,79 @@
-export default function Impressum() {
+'use client'
+
+import { Cormorant_Garamond, DM_Sans } from 'next/font/google'
+import Link from 'next/link'
+import styles from './impressum.module.css'
+
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['300', '400'],
+  style: ['normal', 'italic'],
+  variable: '--font-cormorant',
+  display: 'swap',
+})
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  weight: ['300', '400', '500'],
+  variable: '--font-dm-sans',
+  display: 'swap',
+})
+
+export default function ImpressumPage() {
   return (
-    <main className="max-w-2xl mx-auto px-6 py-24 text-white">
-      <h1 className="text-3xl font-bold mb-8">Impressum</h1>
+    <div className={`${cormorant.variable} ${dmSans.variable} ${styles.root}`}>
+      <nav className={styles.nav}>
+        <Link href="/" className={styles.navLogo}>Vetron</Link>
+        <Link href="/" className={styles.navBack}>← Zurück zur Startseite</Link>
+      </nav>
 
-      <section className="mb-8">
-        <h2 className="text-lg font-semibold mb-2">Angaben gemäß § 5 ECG</h2>
-        <p>Fabio Lechner</p>
-        <p>Schafflerweg 17</p>
-        <p>2721 Bad Fischau-Brunn</p>
-        <p>Österreich</p>
-      </section>
+      <main className={styles.main}>
+        <div className={styles.inner}>
+          <p className={styles.tag}>Rechtliches</p>
+          <h1 className={styles.headline}>Impressum</h1>
+          <div className={styles.divider} />
 
-      <section className="mb-8">
-        <h2 className="text-lg font-semibold mb-2">Kontakt</h2>
-        <p>Telefon: +43 663 06043917</p>
-        <p>E-Mail: vetron.docs@gmail.com</p>
-      </section>
+          <div className={styles.block}>
+            <h2 className={styles.blockTitle}>Angaben gemäß § 5 ECG</h2>
+            <p className={styles.text}>Vetron GmbH</p>
+            <p className={styles.text}>Musterstraße 1<br />2700 Wiener Neustadt<br />Österreich</p>
+          </div>
 
-      <section className="mb-8">
-        <h2 className="text-lg font-semibold mb-2">Online-Streitbeilegung</h2>
-        <p>
-          Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:{" "}
-          <a
-            href="https://ec.europa.eu/consumers/odr"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline"
-          >
-            https://ec.europa.eu/consumers/odr
-          </a>
-        </p>
-        <p className="mt-2">
-          Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
-          Verbraucherschlichtungsstelle teilzunehmen.
-        </p>
-      </section>
+          <div className={styles.block}>
+            <h2 className={styles.blockTitle}>Kontakt</h2>
+            <p className={styles.text}>E-Mail: <a href="mailto:info@vetron.at" className={styles.link}>info@vetron.at</a></p>
+          </div>
 
-      <section>
-        <h2 className="text-lg font-semibold mb-2">Haftung für Inhalte</h2>
-        <p>
-          Als Diensteanbieter sind wir gemäß § 7 Abs. 1 ECG für eigene Inhalte auf diesen Seiten
-          nach den allgemeinen Gesetzen verantwortlich. Wir sind jedoch nicht verpflichtet,
-          übermittelte oder gespeicherte fremde Informationen zu überwachen.
-        </p>
-      </section>
-    </main>
-  );
+          <div className={styles.block}>
+            <h2 className={styles.blockTitle}>Unternehmensgegenstand</h2>
+            <p className={styles.text}>Entwicklung und Vertrieb von B2B-Softwarelösungen für produzierende Unternehmen.</p>
+          </div>
+
+          <div className={styles.block}>
+            <h2 className={styles.blockTitle}>Haftungsausschluss</h2>
+            <p className={styles.text}>
+              Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt. Für die
+              Richtigkeit, Vollständigkeit und Aktualität der Inhalte übernehmen wir jedoch keine
+              Gewähr. Als Diensteanbieter sind wir gemäß § 7 Abs. 1 ECG für eigene Inhalte
+              verantwortlich. Für externe Links übernehmen wir keine Haftung.
+            </p>
+          </div>
+
+          <div className={styles.block}>
+            <h2 className={styles.blockTitle}>Urheberrecht</h2>
+            <p className={styles.text}>
+              Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten
+              unterliegen dem österreichischen Urheberrecht. Die Vervielfältigung, Bearbeitung,
+              Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes
+              bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.
+            </p>
+          </div>
+        </div>
+      </main>
+
+      <footer className={styles.footer}>
+        <span>© 2026 Vetron · <Link href="/datenschutz" className={styles.footerLink}>Datenschutz</Link></span>
+      </footer>
+    </div>
+  )
 }
