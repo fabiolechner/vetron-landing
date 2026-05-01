@@ -103,19 +103,21 @@ export default function VetronPage() {
             textDecoration: 'none',
             display: 'flex',
             alignItems: 'baseline',
-            overflow: 'hidden',
+            width: '7rem',
+            flexShrink: 0,
           }}
         >
           <span
             className={baskerville.className}
             style={{
-              fontSize: '1.75rem',
-              fontWeight: 700,
-              letterSpacing: '-0.01em',
+              fontSize: '1.25rem',
+              fontWeight: 400,
+              letterSpacing: '0.08em',
               color: '#fff',
               lineHeight: 1,
               display: 'flex',
               alignItems: 'baseline',
+              textTransform: 'uppercase',
             }}
           >
             <span style={{ flexShrink: 0 }}>V</span>
