@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Cormorant_Garamond, DM_Sans, Playfair_Display } from 'next/font/google'
+import { Cormorant_Garamond, DM_Sans, Playfair_Display, Libre_Baskerville } from 'next/font/google'
 import Link from 'next/link'
 import styles from './vetron.module.css'
 
@@ -25,6 +25,12 @@ const dmSans = DM_Sans({
   subsets: ['latin'],
   weight: ['300', '400', '500'],
   variable: '--font-dm-sans',
+  display: 'swap',
+})
+
+const baskerville = Libre_Baskerville({
+  subsets: ['latin'],
+  weight: ['700'],
   display: 'swap',
 })
 
@@ -91,7 +97,45 @@ export default function VetronPage() {
 
       {/* ── NAV ── */}
       <nav className={`${styles.nav} ${scrolled ? styles.navScrolled : ''}`}>
-        <a href="#" className={styles.navLogo}>Vetron</a>
+        <a
+          href="#"
+          style={{
+            textDecoration: 'none',
+            display: 'flex',
+            alignItems: 'baseline',
+            overflow: 'hidden',
+          }}
+        >
+          <span
+            className={baskerville.className}
+            style={{
+              fontSize: '1.75rem',
+              fontWeight: 700,
+              letterSpacing: '-0.01em',
+              color: '#fff',
+              lineHeight: 1,
+              display: 'flex',
+              alignItems: 'baseline',
+            }}
+          >
+            <span style={{ flexShrink: 0 }}>V</span>
+            <span
+              style={{
+                display: 'inline-block',
+                maxWidth: scrolled ? '0ch' : '6ch',
+                opacity: scrolled ? 0 : 1,
+                transform: scrolled ? 'translateX(-6px)' : 'translateX(0)',
+                overflow: 'hidden',
+                whiteSpace: 'nowrap',
+                transition:
+                  'max-width 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease, transform 0.45s cubic-bezier(0.4,0,0.2,1)',
+                willChange: 'max-width, opacity, transform',
+              }}
+            >
+              ETRON
+            </span>
+          </span>
+        </a>
         <ul className={styles.navLinks}>
           <li><a href="#produkte">Produkte</a></li>
           <li><a href="#ansatz">Ansatz</a></li>
