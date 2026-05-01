@@ -15,7 +15,10 @@
       "Bash(powershell -Command \"Set-Location 'C:\\\\Users\\\\fabio\\\\Desktop\\\\vetron-landing'; git status 2>&1\")",
       "Bash(powershell -Command \"cd 'C:\\\\\\\\Users\\\\\\\\fabio\\\\\\\\Desktop\\\\\\\\vetron-landing'; git status\")",
       "Bash(cmd /c \"cd /d C:\\\\Users\\\\fabio\\\\Desktop\\\\vetron-landing && git status\")",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(git commit *)"
     ]
   }
 }
