@@ -4,6 +4,13 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { Libre_Baskerville } from 'next/font/google'
+
+const baskerville = Libre_Baskerville({
+  subsets: ['latin'],
+  weight: ['700'],
+  display: 'swap',
+})
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -25,9 +32,43 @@ export default function Navbar() {
     >
       <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="hover:opacity-75 transition-opacity">
-  <img src="/logo-white.png" alt="Vetron" height={44} style={{ height: "44px", width: "auto" }} />
- </Link>
+        <Link
+          href="/"
+          className="flex items-center select-none"
+          style={{ textDecoration: 'none' }}
+          aria-label="Vetron"
+        >
+          <span
+            className={baskerville.className}
+            style={{
+              fontSize: '2rem',
+              fontWeight: 700,
+              letterSpacing: '-0.02em',
+              color: '#fff',
+              lineHeight: 1,
+              display: 'flex',
+              alignItems: 'baseline',
+              overflow: 'hidden',
+            }}
+          >
+            <span style={{ flexShrink: 0 }}>V</span>
+            <span
+              style={{
+                display: 'inline-block',
+                maxWidth: scrolled ? '0ch' : '6ch',
+                opacity: scrolled ? 0 : 1,
+                transform: scrolled ? 'translateX(-4px)' : 'translateX(0)',
+                overflow: 'hidden',
+                whiteSpace: 'nowrap',
+                transition:
+                  'max-width 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease, transform 0.45s cubic-bezier(0.4,0,0.2,1)',
+                willChange: 'max-width, opacity, transform',
+              }}
+            >
+              ETRON
+            </span>
+          </span>
+        </Link>
 
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-8">
