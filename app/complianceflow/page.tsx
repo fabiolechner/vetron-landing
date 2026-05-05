@@ -369,59 +369,158 @@ export default function ComplianceFlowPage() {
         </div>
       </section>
 
-      {/* WORKFLOW + VIDEO */}
-      <div className={styles.workflowWrap} id="workflow">
-        <div className={styles.workflowInner}>
-          <p className={styles.sectionLabel}>Ablauf</p>
-          <h2 className={styles.sectionHeadline}>Von der Excel-Datei zur vollständigen Dokumentation.</h2>
-          <p className={styles.sectionSub}>Der gesamte Compliance-Prozess in einem wöchentlichen Automatik-Zyklus.</p>
+      {/* ABLAUF */}
+      <section id="workflow" style={{ background: '#F8F7F4' }} className="py-20 md:py-28">
+        <div className="max-w-[1200px] mx-auto px-6">
 
-          <div className={styles.workflowLayout}>
-            <div className={styles.workflowSteps}>
-              {workflowSteps.map((step, i) => (
-                <div
-                  key={i}
-                  className={`${styles.workflowStep} ${activeStep === i ? styles.workflowStepActive : ''}`}
-                  onClick={() => setActiveStep(i)}
-                >
-                  <span className={styles.wsNum}>{step.num}</span>
-                  <div>
-                    <div className={styles.wsTitle}>{step.title}</div>
-                    <div className={styles.wsDesc}>{step.desc}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
+          {/* Header */}
+          <p style={{ color: '#1B5E20', letterSpacing: '0.12em', fontSize: 11, fontWeight: 600 }} className="uppercase mb-3">
+            ABLAUF
+          </p>
+          <h2 style={{ fontFamily: 'Georgia, serif', color: '#0D1B2A', fontSize: 'clamp(1.75rem, 3vw, 2.5rem)', fontWeight: 400, lineHeight: 1.2 }} className="mb-3 max-w-2xl">
+            Von der Excel-Datei zur vollständigen Dokumentation.
+          </h2>
+          <p style={{ color: '#6B7280', fontSize: 16 }} className="mb-12">
+            Der gesamte Compliance-Prozess — vollautomatisch, jede Woche.
+          </p>
 
-            <div className={styles.workflowVideoPanel}>
-              <div className={styles.videoBox}>
-                <div className={styles.videoPlaceholder}>
-                  <div className={styles.videoPlay} onClick={() => setVideoClicked(true)}>
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="#fff" style={{ marginLeft: 3 }}>
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </div>
-                  <span className={styles.videoCaption}>
-                    {videoClicked ? 'Demo-Video wird in Kürze verfügbar' : 'Demo-Video ansehen'}
-                  </span>
+          {/* macOS Window */}
+          <div style={{ borderRadius: 12, overflow: 'hidden', border: '1px solid #C8C5BF', boxShadow: '0 2px 40px rgba(0,0,0,0.08)' }}>
+
+            {/* Menubar */}
+            <div style={{ background: '#E4E4E2', borderBottom: '1px solid #D0CEC9' }} className="flex items-center justify-between px-4 h-8">
+              <div className="flex items-center gap-5">
+                <svg width="13" height="16" viewBox="0 0 13 16" fill="#555" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12.5 11.7c-.28.67-.6 1.28-1 1.84-.5.77-1 1.46-1.8 1.48-.72 0-1.08-.43-2-.43-.94 0-1.33.43-2.06.43-.78-.01-1.3-.73-1.8-1.5C2.55 12 1.75 9.23 1.75 8.15c0-2.73 1.78-4.18 3.54-4.18.87 0 1.6.5 2.15.5.52 0 1.45-.57 2.52-.5.43.01 1.65.2 2.43 1.16-.07.05-1.45.9-1.43 2.56.02 1.96 1.73 2.58 1.73 2.58-.04.27-.28.9-.64 1.43zm-3-9.82C9.02.9 9.48 0 10.5 0c-.1.93-.5 1.82-1.05 2.45-.53.63-1.38 1.1-2.1 1.05.08-.75.47-1.5 1.15-2.12" />
+                </svg>
+                <div className="flex items-center gap-4">
+                  <span style={{ fontSize: 13, fontWeight: 600, color: '#1a1a1a' }}>ComplianceFlow</span>
+                  {['Datei', 'Bearbeiten', 'Ansicht'].map(item => (
+                    <span key={item} style={{ fontSize: 13, color: '#555' }}>{item}</span>
+                  ))}
                 </div>
               </div>
-              <div className={styles.videoTimeline}>
-                {workflowSteps.map((step, i) => (
-                  <div
-                    key={i}
-                    className={`${styles.vtStep} ${activeStep === i ? styles.vtStepActive : ''}`}
-                    onClick={() => setActiveStep(i)}
-                  >
-                    <div className={styles.vtLabel}>{step.vtLabel}</div>
-                    <div className={styles.vtDay}>{step.vtDay}</div>
-                  </div>
-                ))}
+              <span style={{ fontSize: 12, color: '#888' }}>compliance@vetron.at | Mo 04. Mai · 09:41</span>
+            </div>
+
+            {/* Titlebar */}
+            <div style={{ background: '#EDECEA', borderBottom: '1px solid #D8D5D0' }} className="flex items-center px-4 h-10 relative">
+              <div className="flex items-center gap-[7px] z-10">
+                <div style={{ width: 13, height: 13, borderRadius: '50%', background: '#FF5F56' }} />
+                <div style={{ width: 13, height: 13, borderRadius: '50%', background: '#FFBD2E' }} />
+                <div style={{ width: 13, height: 13, borderRadius: '50%', background: '#27C93F' }} />
+              </div>
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <span style={{ fontSize: 12, color: '#888' }}>app.vetron.at — ComplianceFlow</span>
               </div>
             </div>
+
+            {/* TODO: Video hier einbetten */}
+            <div
+              style={{
+                background: '#0C150C',
+                aspectRatio: '1300/770',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 16,
+              }}
+            >
+              <button
+                style={{
+                  width: 72,
+                  height: 72,
+                  borderRadius: '50%',
+                  border: '2px solid rgba(255,255,255,0.35)',
+                  background: 'rgba(27,94,32,0.9)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                }}
+              >
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="white" style={{ marginLeft: 4 }}>
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </button>
+              <span
+                style={{
+                  color: 'rgba(255,255,255,0.3)',
+                  fontSize: 11,
+                  letterSpacing: '0.14em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                DEMO ANSEHEN · 90 SEK
+              </span>
+            </div>
+
           </div>
+
+          {/* Icons row */}
+          <div className="flex justify-center gap-4 mt-7">
+
+            {/* Upload */}
+            <div className="flex flex-col items-center gap-2 cursor-pointer">
+              <div
+                className="flex items-center justify-center transition-all duration-200 hover:bg-[#E8F5E9] hover:border-[#A5D6A7]"
+                style={{ width: 66, height: 66, borderRadius: 18, border: '1px solid #D0CEC9', background: '#ECEAE6' }}
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                  <path d="M3 9h18M9 5V3M15 5V3" />
+                </svg>
+              </div>
+              <span style={{ fontSize: 11, color: '#aaa' }}>Upload</span>
+            </div>
+
+            {/* KI & Email */}
+            <div className="flex flex-col items-center gap-2 cursor-pointer">
+              <div
+                className="flex items-center justify-center transition-all duration-200 hover:bg-[#E8F5E9] hover:border-[#A5D6A7]"
+                style={{ width: 66, height: 66, borderRadius: 18, border: '1px solid #D0CEC9', background: '#ECEAE6' }}
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2L14.09 8.26L21 9.27L16 14.14L17.18 21.02L12 17.77L6.82 21.02L8 14.14L3 9.27L9.91 8.26L12 2Z" />
+                  <path d="M19 3L19.5 4.5L21 5L19.5 5.5L19 7L18.5 5.5L17 5L18.5 4.5L19 3Z" />
+                </svg>
+              </div>
+              <span style={{ fontSize: 11, color: '#aaa' }}>KI & Email</span>
+            </div>
+
+            {/* Versand */}
+            <div className="flex flex-col items-center gap-2 cursor-pointer">
+              <div
+                className="flex items-center justify-center transition-all duration-200 hover:bg-[#E8F5E9] hover:border-[#A5D6A7]"
+                style={{ width: 66, height: 66, borderRadius: 18, border: '1px solid #D0CEC9', background: '#ECEAE6' }}
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="6" width="20" height="14" rx="2" />
+                  <path d="M2 10l10 6 10-6" />
+                </svg>
+              </div>
+              <span style={{ fontSize: 11, color: '#aaa' }}>Versand</span>
+            </div>
+
+            {/* Abgleich */}
+            <div className="flex flex-col items-center gap-2 cursor-pointer">
+              <div
+                className="flex items-center justify-center transition-all duration-200 hover:bg-[#E8F5E9] hover:border-[#A5D6A7]"
+                style={{ width: 66, height: 66, borderRadius: 18, border: '1px solid #D0CEC9', background: '#ECEAE6' }}
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M8 12l3 3 5-5" />
+                </svg>
+              </div>
+              <span style={{ fontSize: 11, color: '#aaa' }}>Abgleich</span>
+            </div>
+
+          </div>
+
         </div>
-      </div>
+      </section>
 
       {/* PRICING */}
       <section id="pricing" className={styles.section}>
