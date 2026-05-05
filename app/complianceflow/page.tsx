@@ -50,6 +50,23 @@ export default function ComplianceFlowPage() {
   const [activeStep, setActiveStep] = useState(0)
   const [videoClicked, setVideoClicked] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
+  const [activeIcon, setActiveIcon] = useState(0)
+
+  const VIDEO_CHAPTERS = [
+    { label: 'Upload',    start: 0  },
+    { label: 'KI & Email', start: 10 },
+    { label: 'Versand',   start: 20 },
+    { label: 'Abgleich',  start: 22 },
+  ]
+
+  function getActiveChapter(t: number) {
+    let active = 0
+    for (let i = 0; i < VIDEO_CHAPTERS.length; i++) {
+      if (t >= VIDEO_CHAPTERS[i].start) active = i
+    }
+    return active
+  }
+
   const [showModal, setShowModal] = useState(false)
   const [tlActive, setTlActive] = useState(2)
   const [formState, setFormState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
@@ -424,6 +441,7 @@ export default function ComplianceFlowPage() {
                 style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
                 playsInline
                 preload="metadata"
+                onTimeUpdate={e => setActiveIcon(getActiveChapter((e.target as HTMLVideoElement).currentTime))}
                 onEnded={() => setVideoClicked(false)}
               />
               {!videoClicked && (
@@ -465,7 +483,7 @@ export default function ComplianceFlowPage() {
                     </svg>
                   </button>
                   <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
-                    DEMO ANSEHEN · 90 SEK
+                    DEMO ANSEHEN · 30 SEK
                   </span>
                 </div>
               )}
@@ -475,63 +493,88 @@ export default function ComplianceFlowPage() {
 
           {/* Icons row */}
           <div className="flex justify-center gap-4 mt-7">
-
-            {/* Upload */}
-            <div className="flex flex-col items-center gap-2 cursor-pointer">
-              <div
-                className="flex items-center justify-center transition-all duration-200 hover:bg-[#E8F5E9] hover:border-[#A5D6A7]"
-                style={{ width: 66, height: 66, borderRadius: 18, border: '1px solid #D0CEC9', background: '#ECEAE6' }}
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="5" width="18" height="14" rx="2" />
-                  <path d="M3 9h18M9 5V3M15 5V3" />
-                </svg>
-              </div>
-              <span style={{ fontSize: 11, color: '#aaa' }}>Upload</span>
-            </div>
-
-            {/* KI & Email */}
-            <div className="flex flex-col items-center gap-2 cursor-pointer">
-              <div
-                className="flex items-center justify-center transition-all duration-200 hover:bg-[#E8F5E9] hover:border-[#A5D6A7]"
-                style={{ width: 66, height: 66, borderRadius: 18, border: '1px solid #D0CEC9', background: '#ECEAE6' }}
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2L14.09 8.26L21 9.27L16 14.14L17.18 21.02L12 17.77L6.82 21.02L8 14.14L3 9.27L9.91 8.26L12 2Z" />
-                  <path d="M19 3L19.5 4.5L21 5L19.5 5.5L19 7L18.5 5.5L17 5L18.5 4.5L19 3Z" />
-                </svg>
-              </div>
-              <span style={{ fontSize: 11, color: '#aaa' }}>KI & Email</span>
-            </div>
-
-            {/* Versand */}
-            <div className="flex flex-col items-center gap-2 cursor-pointer">
-              <div
-                className="flex items-center justify-center transition-all duration-200 hover:bg-[#E8F5E9] hover:border-[#A5D6A7]"
-                style={{ width: 66, height: 66, borderRadius: 18, border: '1px solid #D0CEC9', background: '#ECEAE6' }}
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="6" width="20" height="14" rx="2" />
-                  <path d="M2 10l10 6 10-6" />
-                </svg>
-              </div>
-              <span style={{ fontSize: 11, color: '#aaa' }}>Versand</span>
-            </div>
-
-            {/* Abgleich */}
-            <div className="flex flex-col items-center gap-2 cursor-pointer">
-              <div
-                className="flex items-center justify-center transition-all duration-200 hover:bg-[#E8F5E9] hover:border-[#A5D6A7]"
-                style={{ width: 66, height: 66, borderRadius: 18, border: '1px solid #D0CEC9', background: '#ECEAE6' }}
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="9" />
-                  <path d="M8 12l3 3 5-5" />
-                </svg>
-              </div>
-              <span style={{ fontSize: 11, color: '#aaa' }}>Abgleich</span>
-            </div>
-
+            {[
+              {
+                label: 'Upload',
+                icon: (
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="5" width="18" height="14" rx="2" />
+                    <path d="M3 9h18M9 5V3M15 5V3" />
+                  </svg>
+                ),
+              },
+              {
+                label: 'KI & Email',
+                icon: (
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2L14.09 8.26L21 9.27L16 14.14L17.18 21.02L12 17.77L6.82 21.02L8 14.14L3 9.27L9.91 8.26L12 2Z" />
+                    <path d="M19 3L19.5 4.5L21 5L19.5 5.5L19 7L18.5 5.5L17 5L18.5 4.5L19 3Z" />
+                  </svg>
+                ),
+              },
+              {
+                label: 'Versand',
+                icon: (
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="6" width="20" height="14" rx="2" />
+                    <path d="M2 10l10 6 10-6" />
+                  </svg>
+                ),
+              },
+              {
+                label: 'Abgleich',
+                icon: (
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M8 12l3 3 5-5" />
+                  </svg>
+                ),
+              },
+            ].map((item, i) => {
+              const isActive = videoClicked && activeIcon === i
+              return (
+                <div
+                  key={item.label}
+                  className="flex flex-col items-center gap-2 cursor-pointer"
+                  onClick={() => {
+                    if (videoRef.current) {
+                      videoRef.current.currentTime = VIDEO_CHAPTERS[i].start
+                      if (!videoClicked) {
+                        setVideoClicked(true)
+                        videoRef.current.play()
+                      }
+                    }
+                  }}
+                >
+                  <div
+                    style={{
+                      width: 66,
+                      height: 66,
+                      borderRadius: 18,
+                      border: isActive ? '1px solid #1B5E20' : '1px solid #D0CEC9',
+                      background: isActive ? '#1B5E20' : '#ECEAE6',
+                      color: isActive ? '#fff' : '#666',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      transition: 'all 0.25s ease',
+                    }}
+                  >
+                    {item.icon}
+                  </div>
+                  <span
+                    style={{
+                      fontSize: 11,
+                      color: isActive ? '#1B5E20' : '#aaa',
+                      fontWeight: isActive ? 500 : 400,
+                      transition: 'color 0.25s ease',
+                    }}
+                  >
+                    {item.label}
+                  </span>
+                </div>
+              )
+            })}
           </div>
 
         </div>
