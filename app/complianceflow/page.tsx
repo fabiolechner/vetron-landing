@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Playfair_Display, DM_Sans } from 'next/font/google'
 import styles from './complianceflow.module.css'
 
@@ -49,6 +49,7 @@ export default function ComplianceFlowPage() {
   const [scrolled, setScrolled] = useState(false)
   const [activeStep, setActiveStep] = useState(0)
   const [videoClicked, setVideoClicked] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
   const [showModal, setShowModal] = useState(false)
   const [tlActive, setTlActive] = useState(2)
   const [formState, setFormState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
@@ -415,45 +416,59 @@ export default function ComplianceFlowPage() {
               </div>
             </div>
 
-            {/* TODO: Video hier einbetten */}
-            <div
-              style={{
-                background: '#0C150C',
-                aspectRatio: '1300/770',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: 16,
-              }}
-            >
-              <button
-                style={{
-                  width: 72,
-                  height: 72,
-                  borderRadius: '50%',
-                  border: '2px solid rgba(255,255,255,0.35)',
-                  background: 'rgba(27,94,32,0.9)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  cursor: 'pointer',
-                }}
-              >
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="white" style={{ marginLeft: 4 }}>
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </button>
-              <span
-                style={{
-                  color: 'rgba(255,255,255,0.3)',
-                  fontSize: 11,
-                  letterSpacing: '0.14em',
-                  textTransform: 'uppercase',
-                }}
-              >
-                DEMO ANSEHEN · 90 SEK
-              </span>
+            {/* Video Player */}
+            <div style={{ position: 'relative', aspectRatio: '1300/770', background: '#0C150C', overflow: 'hidden' }}>
+              <video
+                ref={videoRef}
+                src="https://pub-6f2a71a95fcc499a8424edf78ab6fabb.r2.dev/CFDemoLoop3.mp4"
+                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+                playsInline
+                preload="metadata"
+                onEnded={() => setVideoClicked(false)}
+              />
+              {!videoClicked && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background: 'rgba(12,21,12,0.55)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 16,
+                    transition: 'opacity 0.3s ease',
+                  }}
+                >
+                  <button
+                    onClick={() => {
+                      setVideoClicked(true)
+                      videoRef.current?.play()
+                    }}
+                    style={{
+                      width: 72,
+                      height: 72,
+                      borderRadius: '50%',
+                      border: '2px solid rgba(255,255,255,0.35)',
+                      background: 'rgba(27,94,32,0.9)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
+                      transition: 'transform 0.2s ease, background 0.2s ease',
+                    }}
+                    onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.06)')}
+                    onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
+                  >
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="white" style={{ marginLeft: 4 }}>
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </button>
+                  <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase' }}>
+                    DEMO ANSEHEN · 90 SEK
+                  </span>
+                </div>
+              )}
             </div>
 
           </div>
