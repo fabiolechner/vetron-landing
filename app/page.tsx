@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Cormorant_Garamond, DM_Sans, Playfair_Display, Libre_Baskerville } from 'next/font/google'
+import { Cormorant_Garamond, DM_Sans, Playfair_Display } from 'next/font/google'
 import Link from 'next/link'
 import styles from './vetron.module.css'
 
@@ -25,12 +25,6 @@ const dmSans = DM_Sans({
   subsets: ['latin'],
   weight: ['300', '400', '500'],
   variable: '--font-dm-sans',
-  display: 'swap',
-})
-
-const baskerville = Libre_Baskerville({
-  subsets: ['latin'],
-  weight: ['700'],
   display: 'swap',
 })
 
@@ -102,41 +96,19 @@ export default function VetronPage() {
           style={{
             textDecoration: 'none',
             display: 'flex',
-            alignItems: 'baseline',
-            width: '7rem',
+            alignItems: 'center',
             flexShrink: 0,
           }}
         >
-          <span
-            className={baskerville.className}
+          <img
+            src="/vetron-logo.svg"
+            alt="Vetron"
             style={{
-              fontSize: '1.25rem',
-              fontWeight: 400,
-              letterSpacing: '0.08em',
-              color: '#fff',
-              lineHeight: 1,
-              display: 'flex',
-              alignItems: 'baseline',
-              textTransform: 'uppercase',
+              height: 28,
+              width: 'auto',
+              display: 'block',
             }}
-          >
-            <span style={{ flexShrink: 0 }}>V</span>
-            <span
-              style={{
-                display: 'inline-block',
-                maxWidth: scrolled ? '0ch' : '6ch',
-                opacity: scrolled ? 0 : 1,
-                transform: scrolled ? 'translateX(-6px)' : 'translateX(0)',
-                overflow: 'hidden',
-                whiteSpace: 'nowrap',
-                transition:
-                  'max-width 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease, transform 0.45s cubic-bezier(0.4,0,0.2,1)',
-                willChange: 'max-width, opacity, transform',
-              }}
-            >
-              ETRON
-            </span>
-          </span>
+          />
         </a>
         <ul className={styles.navLinks}>
           <li><a href="#produkte">Produkte</a></li>
