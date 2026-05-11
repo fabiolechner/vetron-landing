@@ -73,6 +73,7 @@ function CFIcon({ size = 22, color = '#1B5E20' }: { size?: number; color?: strin
 
 export default function VetronPage() {
   const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const [formState, setFormState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [formData, setFormData] = useState({
@@ -81,6 +82,7 @@ export default function VetronPage() {
 
   const openModal = () => {
     setShowModal(true)
+    setMenuOpen(false)
     setFormState('idle')
     document.body.style.overflow = 'hidden'
   }
@@ -130,7 +132,31 @@ export default function VetronPage() {
           <li><a href="#kontakt">Kontakt</a></li>
         </ul>
         <button onClick={openModal} className={styles.navCta}>Kontakt aufnehmen</button>
+        <button
+          className={styles.navHamburger}
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Menu"
+        >
+          {menuOpen ? (
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
+          ) : (
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
+          )}
+        </button>
       </nav>
+      {menuOpen && (
+        <div className={styles.navMobileOpen}>
+          <a href="#produkte" className={styles.navMobileLink} onClick={() => setMenuOpen(false)}>Produkte</a>
+          <a href="#ansatz" className={styles.navMobileLink} onClick={() => setMenuOpen(false)}>Ansatz</a>
+          <a href="#unternehmen" className={styles.navMobileLink} onClick={() => setMenuOpen(false)}>Unternehmen</a>
+          <a href="#kontakt" className={styles.navMobileLink} onClick={() => setMenuOpen(false)}>Kontakt</a>
+          <button onClick={() => { openModal(); setMenuOpen(false) }} className={styles.navMobileCta}>Kontakt aufnehmen</button>
+        </div>
+      )}
 
       {/* ── HERO ── */}
       <section className={styles.hero}>

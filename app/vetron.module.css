@@ -1055,3 +1055,110 @@ button.ctaBtn {
   border: none;
   cursor: pointer;
 }
+
+/* ── HAMBURGER NAV (Mobile) ── */
+.navHamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #F0F2F5;
+  padding: 6px;
+  flex-shrink: 0;
+  line-height: 0;
+}
+.navMobileOpen {
+  position: fixed;
+  top: 68px;
+  left: 0;
+  right: 0;
+  background: rgba(10, 22, 40, 0.98);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(240, 242, 245, 0.07);
+  padding: 20px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  z-index: 99;
+}
+.navMobileLink {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(240, 242, 245, 0.55);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(240, 242, 245, 0.06);
+  transition: color 0.2s;
+  display: block;
+}
+.navMobileLink:hover { color: #F0F2F5; }
+.navMobileCta {
+  margin-top: 20px;
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: #0a1628;
+  background: #c9a84c;
+  padding: 13px 20px;
+  letter-spacing: 0.08em;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.2s;
+}
+.navMobileCta:hover { background: #b8962e; }
+
+/* ── MOBILE BREAKPOINTS ── */
+@media (max-width: 767px) {
+  .navHamburger { display: flex; align-items: center; justify-content: center; }
+  .navLinks { display: none !important; }
+  .navCta { display: none !important; }
+  button.navCta { display: none !important; }
+
+  .nav { padding: 0 20px; }
+
+  .hero { padding: 0 20px 72px; }
+  .heroActions { flex-wrap: wrap; gap: 16px; }
+  .heroScroll { display: none; }
+
+  .prodInner { padding: 72px 20px; }
+  .prodHeader { grid-template-columns: 1fr; gap: 24px; margin-bottom: 40px; }
+  .prodGrid { grid-template-columns: 1fr; }
+  .pCard { padding: 36px 24px; }
+
+  .whyInner { grid-template-columns: 1fr; gap: 40px; padding: 72px 20px; }
+  .whyLeft { position: static; }
+  .whySub { max-width: none; }
+
+  .approachInner { padding: 72px 20px; }
+  .approachGrid { grid-template-columns: 1fr; }
+  .approachItem { padding: 32px 24px; }
+
+  .austriaInner { grid-template-columns: 1fr; gap: 40px; padding: 72px 20px; }
+  .austriaRight { display: none; }
+
+  .ctaInner { grid-template-columns: 1fr; gap: 36px; padding: 72px 20px; }
+  .ctaActions { align-items: flex-start; }
+
+  .footerTop {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+    padding: 48px 20px 32px;
+  }
+  .footerTop > *:first-child { grid-column: 1 / -1; }
+  .footerBottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px 20px;
+  }
+
+  .modalHeader { padding: 24px 20px 18px; }
+  .modalForm { padding: 20px 20px 24px; }
+  .modalRow { grid-template-columns: 1fr; }
+  .modalSuccess { padding: 32px 20px; }
+  .modalFooter { flex-direction: column; align-items: stretch; gap: 12px; }
+  .modalSubmit { width: 100%; justify-content: center; }
+}

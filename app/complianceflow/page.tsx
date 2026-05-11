@@ -67,6 +67,7 @@ export default function ComplianceFlowPage() {
     return active
   }
 
+  const [menuOpen, setMenuOpen] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const [tlActive, setTlActive] = useState(2)
   const [formState, setFormState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
@@ -174,7 +175,31 @@ export default function ComplianceFlowPage() {
             <button onClick={openModal} className={styles.navCta}>Demo anfragen</button>
           </li>
         </ul>
+        <button
+          className={styles.navHamburger}
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Menu"
+        >
+          {menuOpen ? (
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
+          ) : (
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
+          )}
+        </button>
       </nav>
+      {menuOpen && (
+        <div className={styles.navMobileOpen}>
+          <a href="#features" className={styles.navMobileLink} onClick={() => setMenuOpen(false)}>Funktionen</a>
+          <a href="#workflow" className={styles.navMobileLink} onClick={() => setMenuOpen(false)}>Ablauf</a>
+          <a href="#pricing" className={styles.navMobileLink} onClick={() => setMenuOpen(false)}>Preise</a>
+          <a href="mailto:info@vetron.at" className={styles.navMobileLink} onClick={() => setMenuOpen(false)}>Kontakt</a>
+          <button onClick={() => { openModal(); setMenuOpen(false) }} className={styles.navMobileCta}>Demo anfragen</button>
+        </div>
+      )}
 
       {/* HERO */}
       <div className={styles.heroNew}>
