@@ -19,23 +19,6 @@ const dmSans = DM_Sans({
   display: 'swap',
 })
 
-// CF Logo Icon — real vectorized paths
-function CFIcon({ size = 28, color = '#1B5E20' }: { size?: number; color?: string }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="185 228 58 58"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      style={{ flexShrink: 0, transform: 'translateY(2px)' }}
-    >
-      <g fill={color}>
-        <path d="M206.40 269.50 c-12.20 -3.79 -16.28 -18.47 -7.78 -27.90 c3.65 -4.03 7.19 -5.54 13.32 -5.54 c3.16 -0.05 4.08 0.15 6.85 1.51 c1.70 0.88 3.69 2.14 4.33 2.87 l1.22 1.26 l-4.38 -0.29 c-2.38 -0.19 -5.88 -0.44 -7.78 -0.58 c-4.33 -0.34 -6.56 0.34 -9.38 2.87 c-2.87 2.67 -4.03 5.35 -4.03 9.33 c0 3.45 1.02 6.32 3.16 8.85 c1.46 1.70 6.27 4.33 7.05 3.79 c0.34 -0.19 0.53 -4.08 0.53 -11.18 c0 -9.43 0.10 -10.89 0.78 -11.13 c0.44 -0.15 5.25 -0.29 10.69 -0.29 l9.92 0 l0 1.94 l0 1.94 l-8.51 0 l-8.51 0 l0 2.19 l0 2.14 l4.72 0.15 l4.67 0.15 l0.10 1.46 c0.15 2.38 -0.44 2.67 -5.15 2.67 l-4.33 0 l0 5.15 c0 5.10 0 5.10 1.12 4.81 c1.56 -0.49 4.91 -2.48 5.69 -3.35 c0.34 -0.44 0.97 -0.78 1.41 -0.78 c1.22 0.05 3.16 1.75 2.82 2.53 c-0.49 1.31 -6.13 5.25 -8.26 5.74 c-2.92 0.68 -7.49 0.53 -10.26 -0.29z" />
-      </g>
-    </svg>
-  )
-}
 
 function CheckIcon({ color = 'currentColor' }: { color?: string }) {
   return (
@@ -163,8 +146,7 @@ export default function ComplianceFlowPage() {
       {/* NAV */}
       <nav className={`${styles.nav} ${scrolled ? styles.navScrolled : ''}`}>
         <a href="#" className={styles.navLogo}>
-          <CFIcon size={28} color="#1B5E20" />
-          <span className={styles.navLogoWordmark}>ComplianceFlow</span>
+          <img src="/complianceflow-logo.svg" height={20} width={130} alt="ComplianceFlow" style={{display:'block'}} />
         </a>
         <ul className={styles.navLinks}>
           <li><a href="#features">Funktionen</a></li>
