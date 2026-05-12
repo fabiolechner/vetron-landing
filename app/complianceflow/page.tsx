@@ -146,7 +146,7 @@ export default function ComplianceFlowPage() {
       {/* NAV */}
       <nav className={`${styles.nav} ${scrolled ? styles.navScrolled : ''}`}>
         <a href="#" className={styles.navLogo}>
-          <img src="/complianceflow-logo.svg" height={24} style={{display:'block', width:'auto'}} alt="ComplianceFlow" />
+          <img src="/complianceflow-logo.svg" style={{height:'22px', width:'auto', display:'block'}} alt="ComplianceFlow" />
         </a>
         <ul className={styles.navLinks}>
           <li><a href="#features">Funktionen</a></li>
