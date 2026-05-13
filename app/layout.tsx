@@ -10,7 +10,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Vetron — Automatisierung für den Mittelstand",
+  title: "Vetron (Österreich)",
   description:
     "Intelligente Software für den österreichischen Mittelstand. CE-Erklärungen und Sicherheitsdatenblätter vollautomatisch verwaltet.",
 };
