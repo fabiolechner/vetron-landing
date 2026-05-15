@@ -49,15 +49,25 @@ export default function BriefingPage() {
           <Link
             href="/"
             aria-label="Vetron — Startseite"
-            className="text-xl tracking-tight"
-            style={{
-              fontFamily: "var(--font-playfair), Georgia, serif",
-              fontWeight: 500,
-              color: COLORS.forest,
-              letterSpacing: "-0.01em",
-            }}
+            className="inline-block"
           >
-            Vetron
+            <span
+              aria-hidden="true"
+              style={{
+                display: "block",
+                width: "104px",
+                height: "32px",
+                backgroundColor: COLORS.forest,
+                WebkitMaskImage: "url(/vetron-logo.svg)",
+                maskImage: "url(/vetron-logo.svg)",
+                WebkitMaskRepeat: "no-repeat",
+                maskRepeat: "no-repeat",
+                WebkitMaskPosition: "left center",
+                maskPosition: "left center",
+                WebkitMaskSize: "contain",
+                maskSize: "contain",
+              }}
+            />
           </Link>
         </div>
       </header>
@@ -126,7 +136,7 @@ export default function BriefingPage() {
           >
             <div
               className="calendly-inline-widget"
-              data-url="https://calendly.com/DEIN_LINK?hide_event_type_details=1&hide_gdpr_banner=1&background_color=f5f4f0&text_color=1a1a18&primary_color=1b5e20"
+              data-url="https://calendly.com/vetron-info/30min?hide_event_type_details=1&hide_gdpr_banner=1&background_color=f5f4f0&text_color=1a1a18&primary_color=1b5e20"
               style={{ minWidth: "320px", height: "700px" }}
             />
           </div>
