@@ -20,7 +20,7 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "Executive Briefing — Vetron ComplianceFlow",
   description:
-    "In 15 Minuten zum Fahrplan für Ihren ersten autonomen Pilot-Loop. Keine IT-Integration. Keine System-Migration.",
+    "In 10 Minuten zum Fahrplan für Ihren ersten autonomen Pilot-Loop. Keine IT-Integration. Keine System-Migration.",
 };
 
 const COLORS = {
@@ -102,7 +102,7 @@ export default function BriefingPage() {
             className="text-base sm:text-lg leading-relaxed max-w-[600px] mx-auto"
             style={{ color: COLORS.muted, fontWeight: 400 }}
           >
-            In 15 Minuten zum Fahrplan für Ihren ersten autonomen Pilot-Loop.
+            In 10 Minuten zum Fahrplan für Ihren ersten autonomen Pilot-Loop.
             Keine IT-Integration. Keine System-Migration.
           </p>
 
