@@ -1,14 +1,14 @@
 'use client'
 
-import { Cormorant_Garamond, DM_Sans } from 'next/font/google'
+import { Playfair_Display, DM_Sans } from 'next/font/google'
 import Link from 'next/link'
 import styles from './impressum.module.css'
 
-const cormorant = Cormorant_Garamond({
+const playfair = Playfair_Display({
   subsets: ['latin'],
-  weight: ['300', '400'],
+  weight: ['400', '500', '600'],
   style: ['normal', 'italic'],
-  variable: '--font-cormorant',
+  variable: '--font-playfair',
   display: 'swap',
 })
 
@@ -19,12 +19,14 @@ const dmSans = DM_Sans({
   display: 'swap',
 })
 
-export default function ImpressumPage() {
+export default function CfImpressumPage() {
   return (
-    <div className={`${cormorant.variable} ${dmSans.variable} ${styles.root}`}>
+    <div className={`${playfair.variable} ${dmSans.variable} ${styles.root}`}>
       <nav className={styles.nav}>
-        <Link href="/" className={styles.navLogo}>Vetron</Link>
-        <Link href="/" className={styles.navBack}>← Zurück zur Startseite</Link>
+        <Link href="/complianceflow" className={styles.navLogo}>
+          <img src="/complianceflow-logo.svg" style={{ height: '22px', width: 'auto', display: 'block' }} alt="ComplianceFlow" />
+        </Link>
+        <Link href="/complianceflow" className={styles.navBack}>← Zurück zu ComplianceFlow</Link>
       </nav>
 
       <main className={styles.main}>
@@ -98,12 +100,11 @@ export default function ImpressumPage() {
       </main>
 
       <footer className={styles.footer}>
-        <span>
-          © 2026 Vetron ·{' '}
-          <Link href="/datenschutz" className={styles.footerLink}>Datenschutz</Link>
-          {' '}·{' '}
-          <Link href="/agb" className={styles.footerLink}>AGB</Link>
-        </span>
+        <span className={styles.footerBrand}>Compliance<span>Flow</span></span>
+        <ul className={styles.footerLinks}>
+          <li><a href="https://vetron.at">vetron.at</a></li>
+          <li><Link href="/complianceflow/datenschutz">Datenschutz</Link></li>
+        </ul>
       </footer>
     </div>
   )

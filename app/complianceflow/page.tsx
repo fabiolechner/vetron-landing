@@ -666,8 +666,8 @@ export default function ComplianceFlowPage() {
         <ul className={styles.footerLinks}>
           <li><a href="https://vetron.at">vetron.at</a></li>
           <li><a href="mailto:info@vetron.at">info@vetron.at</a></li>
-          <li><a href="#">Impressum</a></li>
-          <li><a href="#">Datenschutz</a></li>
+          <li><a href="/complianceflow/impressum">Impressum</a></li>
+          <li><a href="/complianceflow/datenschutz">Datenschutz</a></li>
         </ul>
       </footer>
 
