@@ -24,7 +24,7 @@ export default function CfDatenschutzPage() {
     <div className={`${playfair.variable} ${dmSans.variable} ${styles.root}`}>
       <nav className={styles.nav}>
         <Link href="/complianceflow" className={styles.navLogo}>
-          <img src="/complianceflow-logo.svg" style={{ height: '22px', width: 'auto', display: 'block' }} alt="ComplianceFlow" />
+          <img src="/CF-Logo-Mai.svg" style={{ height: '44px', width: 'auto', display: 'block' }} alt="ComplianceFlow" />
         </Link>
         <Link href="/complianceflow" className={styles.navBack}>← Zurück zu ComplianceFlow</Link>
       </nav>
