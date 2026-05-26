@@ -625,7 +625,8 @@ export default function ComplianceFlowPage() {
             <hr className={styles.pDivider} />
             <ul className={styles.pFeatures}>
               {[
-                'Alles aus Base',
+                'Bis zu 300 aktive Lieferanten',
+                'Alle Features aus dem Base-Plan',
                 'Automatische Gmail/Outlook-Integration',
                 'Vollstufige Eskalations-Automatik',
                 'Unbegrenztes Artikel-Gedächtnis',
@@ -641,11 +642,12 @@ export default function ComplianceFlowPage() {
           <div className={styles.pricingCard}>
             <div className={styles.pTier}>Enterprise</div>
             <div className={styles.pPrice} style={{ fontSize: 28, paddingTop: 6, letterSpacing: '-0.01em' }}>Auf Anfrage</div>
-            <div className={styles.pPeriod}>Ab 300+ Lieferanten (Individuell skaliert)</div>
+            <div className={styles.pPeriod}>&nbsp;</div>
             <hr className={styles.pDivider} />
             <ul className={styles.pFeatures}>
               {[
-                'Alles aus Professional',
+                'Ab 300+ Lieferanten (Individuell skaliert)',
+                'Alle Features aus dem Professional-Plan',
                 'Multi-Mandanten-Fähigkeit',
                 'Custom ERP-Integration (auf Anfrage)',
                 'Dedizierter Account Manager',
