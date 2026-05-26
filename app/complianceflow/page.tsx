@@ -596,29 +596,41 @@ export default function ComplianceFlowPage() {
         </div>
         <div className={styles.pricingGrid}>
 
-          {/* Starter */}
+          {/* Base */}
           <div className={styles.pricingCard}>
-            <div className={styles.pTier}>Starter</div>
-            <div className={styles.pPrice}>€399</div>
-            <div className={styles.pPeriod}>pro Monat, zzgl. MwSt.</div>
+            <div className={styles.pTier}>Base</div>
+            <div className={styles.pPrice}>€599</div>
+            <div className={styles.pPeriod}>/ Monat (zzgl. MwSt.)</div>
             <hr className={styles.pDivider} />
             <ul className={styles.pFeatures}>
-              {['Bis zu 50 Lieferanten/Monat', 'CE & TDB Kategorisierung', 'Email-Finder + Auto-Versand', 'Wochenbericht (Excel)', 'Email-Support'].map(f => (
+              {[
+                'Bis zu 100 aktive Lieferanten',
+                'CE & TDB Kategorisierung per Vetron AI',
+                'Automatischer Email-Finder + Versand',
+                'PDF-Matching & Basis-Eskalation',
+                'Regulärer Email-Support',
+              ].map(f => (
                 <li key={f} className={styles.pFeature}><CheckIcon />{f}</li>
               ))}
             </ul>
-            <a href="mailto:info@vetron.at" className={`${styles.pCta} ${styles.pCtaOutline}`}>Jetzt starten</a>
+            <button onClick={openModal} className={`${styles.pCta} ${styles.pCtaOutline}`}>14-Tage-Pilot starten</button>
           </div>
 
           {/* Professional */}
           <div className={`${styles.pricingCard} ${styles.pricingFeatured}`}>
             <div className={styles.pricingBadge}>Beliebtester Plan</div>
             <div className={styles.pTier}>Professional</div>
-            <div className={styles.pPrice}>€699</div>
-            <div className={styles.pPeriod}>pro Monat, zzgl. MwSt.</div>
+            <div className={styles.pPrice}>€1.199</div>
+            <div className={styles.pPeriod}>/ Monat (zzgl. MwSt.)</div>
             <hr className={styles.pDivider} />
             <ul className={styles.pFeatures}>
-              {['Unbegrenzte Lieferanten', 'Gmail-Integration (automatisch)', 'KI PDF-Matching & Zuordnung', 'Artikel-Gedächtnis (60 Tage)', 'Eskalations-Automatik', 'Priority-Support (24h)'].map(f => (
+              {[
+                'Alles aus Base',
+                'Automatische Gmail/Outlook-Integration',
+                'Vollstufige Eskalations-Automatik',
+                'Unbegrenztes Artikel-Gedächtnis',
+                'Priority-Support (24h SLA)',
+              ].map(f => (
                 <li key={f} className={styles.pFeature}><CheckIcon color="#4ADE80" />{f}</li>
               ))}
             </ul>
@@ -629,10 +641,15 @@ export default function ComplianceFlowPage() {
           <div className={styles.pricingCard}>
             <div className={styles.pTier}>Enterprise</div>
             <div className={styles.pPrice} style={{ fontSize: 28, paddingTop: 6, letterSpacing: '-0.01em' }}>Auf Anfrage</div>
-            <div className={styles.pPeriod}>individuelles Angebot</div>
+            <div className={styles.pPeriod}>Ab 300+ Lieferanten (Individuell skaliert)</div>
             <hr className={styles.pDivider} />
             <ul className={styles.pFeatures}>
-              {['Alles aus Professional', 'Multi-Mandanten', 'ERP-Integration auf Anfrage', 'Dedizierter Account Manager', 'SLA-Garantie'].map(f => (
+              {[
+                'Alles aus Professional',
+                'Multi-Mandanten-Fähigkeit',
+                'Custom ERP-Integration (auf Anfrage)',
+                'Dedizierter Account Manager',
+              ].map(f => (
                 <li key={f} className={styles.pFeature}><CheckIcon />{f}</li>
               ))}
             </ul>
