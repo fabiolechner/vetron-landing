@@ -202,7 +202,7 @@ export default function VetronPage() {
               <div className={styles.pCardTopCF} />
               <div className={styles.pNum}>01</div>
               <div className={styles.pIcon}>
-                <img src="/complianceflow-logo.svg" style={{height:'32px', width:'auto', display:'block', filter:'brightness(0) invert(1)'}} alt="ComplianceFlow" />
+                <img src="/CF-Logo-Mai.svg" style={{height:'32px', width:'auto', display:'block'}} alt="ComplianceFlow" />
               </div>
               <div className={styles.pCat}>CE-Dokumentation &amp; Compliance</div>
               <div className={styles.pBadgeCF}>
