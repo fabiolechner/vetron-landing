@@ -32,7 +32,8 @@
   overflow-x: hidden;
 }
 
-.root a { color: inherit; text-decoration: none; }
+.root a { text-decoration: none; }
+.root a:not([class]) { color: inherit; }
 .root img, .root svg { display: block; }
 .root ::selection { background: rgba(21,36,63,0.14); }
 

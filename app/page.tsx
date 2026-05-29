@@ -208,7 +208,7 @@ export default function VetronPage() {
             <div className={`${styles.card} ${styles.cardFeature} ${styles.reveal}`} data-reveal="">
               <div className={styles.cardNum}>01</div>
               <div className={`${styles.badge} ${styles.badgeLive}`}><span className={styles.badgeDot}></span>Live verfügbar</div>
-              <img src="/CF-Logo-Mai.svg" style={{height:'48px',width:'auto',display:'block',marginBottom:'8px'}} alt="ComplianceFlow" />
+              <div className={styles.cardName}>ComplianceFlow</div>
               <div className={styles.cardCat}>CE-Dokumentation &amp; Compliance</div>
               <p className={styles.cardDesc}>
                 Automatisierte CE-Erklärungen und Sicherheitsdatenblätter von Lieferanten —
