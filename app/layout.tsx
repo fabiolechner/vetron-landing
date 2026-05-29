@@ -1,18 +1,10 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
 import "./globals.css";
 
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "500", "700"],
-});
-
 export const metadata: Metadata = {
-  title: "Vetron (Österreich)",
+  title: "Vetron — Think Deeper",
   description:
-    "Intelligente Software für den österreichischen Mittelstand. CE-Erklärungen und Sicherheitsdatenblätter vollautomatisch verwaltet.",
+    "Vetron automatisiert die Busy Work produzierender Betriebe mit KI — damit Ihre Teams Zeit für das gewinnen, was zählt: tiefes, konzentriertes Denken. Entwickelt in Österreich.",
 };
 
 export default function RootLayout({
@@ -21,8 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="de" className={`${dmSans.variable} h-full`}>
-      <body className="min-h-full bg-black text-white antialiased">{children}</body>
+    <html lang="de" className="h-full">
+      <body className="min-h-full">{children}</body>
     </html>
   );
 }
